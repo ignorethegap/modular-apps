@@ -1,0 +1,25 @@
+{
+    "name": "html5sales-webapp",
+    "version": "1.0.0",
+    "description": "Common ground for all modules and apps. In your own company you might break these out as separate repositories",
+    "main": "none.js",
+    "scripts": {
+      "test": "./node_modules/gulp test"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/ignorethegap/modular-apps.git"
+    },
+    "keywords": [
+      "module",
+      "frontend",
+      "javascript",
+      "apps"
+    ],
+    "author": "Henrik Vendelbo",
+    "license": "UNLICENSED",
+    "bugs": {
+      "url": "https://github.com/ignorethegap/modular-apps/issues"
+    },
+    "homepage": "https://github.com/ignorethegap/modular-apps#readme",
+}
