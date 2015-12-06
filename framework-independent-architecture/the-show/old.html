@@ -1,0 +1,414 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Framework Independent Front-end Architecture</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<!-- <link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css"> -->
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<!-- <link type="text/css" rel="stylesheet" href="assets/css/styles.css" /> -->
+</head>
+<body class="list">
+
+	<!-- <form class="login"> -->
+	<!-- 	<span>What's your secret key?</span> -->
+	<!-- 	<input type="text" placeholder="Please enter your secret key!"/> -->
+	<!-- 	<input type="submit" value="➡" /> -->
+	<!-- </form> -->
+
+	<!-- <div class="reveal blurred"> -->
+	<!-- 	<div class="slides"> -->
+	<!-- 		<section data&#45;background="assets/img/1.jpg"> -->
+	<!-- 			<p>Experiment by <a class="tz&#45;link" href="http://tutorialzine.com/2015/02/smartphone&#45;remote&#45;control&#45;for&#45;presentations/">tutorial<span>zine</span></a></p> -->
+	<!-- 			<p><small>Open this presentation on your computer and smartphone. <br>Transition by swiping or pressing keyboard keys.</small></p> -->
+	<!-- 		</section> -->
+	<!-- 		<section> -->
+	<!-- 			<section data&#45;background="assets/img/2.jpg">Vertical Slide 1</section> -->
+	<!-- 			<section data&#45;background="assets/img/3.jpg">Vertical Slide 2</section> -->
+	<!-- 			<section data&#45;background="assets/img/4.jpg">Vertical Slide 3</section> -->
+	<!-- 		</section> -->
+	<!-- 		<section data&#45;background="assets/img/5.jpg">Single Horizontal Slide 2</section> -->
+	<!-- 		<section> -->
+	<!-- 			<section data&#45;background="assets/img/6.jpg">Vertical Slide 4</section> -->
+	<!-- 			<section data&#45;background="assets/img/7.jpg">Vertical Slide 5</section> -->
+	<!-- 		</section> -->
+	<!-- 	</div> -->
+	<!-- </div> -->
+
+	<!-- Including the JS libraries that we use -->
+	<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+
+	<!-- Reveal.js is for presentations -->
+	<!-- <script src="assets/revealjs/lib/js/head.min.js"></script> -->
+	<!-- <script src="assets/revealjs/js/reveal.js"></script> -->
+
+	<!-- Socket.io library -->
+	<script src="/socket.io/socket.io.js"></script>
+
+	<!-- Main JavaScript file -->
+	<script src="assets/js/script.js"></script>
+
+	<header class="caption">
+		<h1>Framework Independent Front-end Architecture</h1>
+		<p>Henrik Vendelbo (@thepian) <a href="http://ignorethegap.com">ignorethegap.com</a></p>
+	</header>
+
+	<section class="slide cover" id="Cover"><div>
+		<h2>Framework Independent Front-end Architecture</h2>
+		<p>Presented by <a href="http://twitter.com/thepian">Henrik Vendelbo</a></p>
+		<h3>Opinions ahead ...</h3>
+		<img src="pictures/cover.jpg" alt="">
+		<!--
+			To apply styles to the certain slides
+			set slide ID to get needed elements
+			-->
+		<style>
+			.cover h3, .cover h4 {
+				color: white;
+				text-align: center;
+				font: 700 40px/1 'PT Sans Narrow', sans-serif;
+				margin:30px 0 0;
+			}
+
+			#Cover h2 {
+				margin:30px 0 0;
+				color:#FFF;
+				text-align:center;
+				font-size:70px;
+				}
+			#Cover p {
+				margin:10px 0 0;
+				text-align:center;
+				color:#FFF;
+				font-style:italic;
+				font-size:20px;
+				}
+				#Cover p a {
+					color:#FFF;
+					}
+		</style>
+	</div></section>
+
+	<style>
+	.laid-out .center {
+		display: block;
+		text-align: center;
+	}
+	.laid-out .center-block {
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.laid-out em {
+		color: red;
+	}
+	.laid-out .small {
+		font-size: .8em;
+		margin-bottom: 20px;
+	}
+	.laid-out .big {
+		font-weight: 500;
+		font-size: 2em;
+	}
+	.laid-out .overlay {
+		background-color: rgba(255,255,255,0.8);
+	}
+	</style>
+
+	<section class="slide laid-out"><div>
+		<h2>The Legacy Problem</h2>
+
+		<blockquote>.. means giving an object its instance variables. Really. That's it.
+			<address>James Shore, 22 March 2006</address></blockquote>
+		<em class="center big">vs</em>
+		<blockquote>.., a good way to import static dependencies.
+			<address>(Angular 1 mindset)</address></blockquote>
+
+				<notes>
+					I ran into a problem recently where we have the majority of the customer website implemented with plain jQuery over a number of years, and the newer parts of the website being implemented with Angular to provide a more interactive interface.
+
+					Since these two parts have a lot of functionality in common it would make sense to have a shared codebase. The best argument for that is the ability to rapidly adjust and improve the shared parts rather than the idea of cost saving which rarely pans out.
+
+					We did make some headway in making the code framework independent, but there is still room for improvement, so I will present what I have found so far and invite your comments and improvements.
+
+					The broader topic here is that the amount of JavaScript we put in our websites has grown a lot, and it needs to be managed better as a code base.
+				</notes>
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Who am I</h2>
+
+		<p>Henrik Vendelbo<br>
+		- Front-end Web Developer</p>
+
+		<notes>
+
+			<p>Full time AngularJS development for 2.5 years,
+				before that focused on high-performance JavaScript for 6 years.</p>
+			<p>In a past life I taught new employees at Microsoft how to develop with Microsoft Dynamics.</p>
+
+			<p>Right now I’m working of condensing my experiences into several workshops that aims to,</p>
+
+			<ul>
+				<li>Make your front-end code longer lived</li>
+				<li>Have a consistent user experience between Apps and Web</li>
+				<li>Get designers and developers to collaborate closer</li>
+				<li>Help Java developers live happily with “all this crazy frontend-stuff”</li>
+			</ul>
+		</notes>
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>What Architecture?</h2>
+
+		<ul>
+			<li>Composing Apps + Libs</li>
+			<li>How to write modules</li>
+			<li>Core library &and; Browser base</li>
+			<li>Developing and Building</li>
+			<li>Continuous Testing and Deploy</li>
+		</ul>
+
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Let's not forget</h2>
+
+		<ul>
+			<li>Environment/deployment configuration</li>
+			<li>Managing translations</li>
+			<li>Good HTML markup use</li>
+			<li>Sane common CSS</li>
+			<li>Using Sass/Less the right way</li>
+			<li>Treat URLs as an API</li>
+			<li>Modelling data on Client and Server</li>
+			<li>Caching strategy</li>
+			<li>Considering npm, bower and jspm</li>
+		</ul>
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Composing Apps + Libs</h2>
+
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>How to write modules</h2>
+
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Existing jQuery code</h2>
+
+	</div></section>
+
+
+	<section class="slide laid-out"><div>
+		<h2>Core library &and; Browser base</h2>
+
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Developing and building</h2>
+
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Continuous Testing and deployment</h2>
+
+	</div></section>
+
+
+///
+	<section class="slide laid-out"><div>
+		<h2>Avoids tight coupling</h2>
+		<pre>
+		<code>// @ngInject</code>
+		<code>function Controller($state, $window, DataModel) {</code>
+		<code>	var vm = this;</code>
+		<code>	DataModel.$promise.then(function() {</code>
+		<code>		vm.products = listProducts(DataModel);</code>
+		<code>	});</code>
+		<code>	vm.debug = { href: $window.location.href.path };</code>
+		<code>}</code>
+		</pre>
+	</div>
+	<div class="next overlay">
+		<h3 style="position:absolute;top:33%;right:25%;">Easier to test with injected stubs</h3>
+		<h3 style="position:absolute;top:48%;left:50%;">Fewer concerns per function</h3>
+		<h3 style="position:absolute;bottom:25%;right:30%;">Focus on objective, less boilerplate</h3>
+	</div>
+	</section>
+
+	<section class="slide laid-out"><div>
+		<h2>and then the Abuse</h2>
+		<pre>
+		<code>// @ngInject</code>
+		<code>function Controller(DataModel, UtilService) {</code>
+		<code>	if (UtilService.isEmptyObject(DataModel.info)) {</code>
+		<code>		this.products = [];</code>
+		<code>	});</code>
+		<code>}</code>
+		<code>angular.module("app",["model","util"])</code>
+		<code>	.controller("AppController",Controller);</code>
+		</pre>
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Providers = no go</h2>
+		<pre>
+		<code>// @ngInject <em>Fail!</em></code>
+		<code>function Provider(DataModel, UtilService) {</code>
+		<code>	if (UtilService.isEmptyObject(DataModel.info)) {</code>
+		<code>		this.products = [];</code>
+		<code>	});</code>
+		<code>}</code>
+		<code>Provider.prototype.$get = function() { return this; };</code>
+		</pre>
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<p>Just like Inheritance shouldn't be used for sharing code, Dependency
+		Injection isn't ideal for sharing code.</p>
+		<h2>DI is for access to shared data, not code</h2>
+		<ol>
+			<li>Know your toolbox</li>
+			<li>Don't tie your hands arbitrarily</li>
+			<li>There is no silver bullet</li>
+		</ol>
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<p class="small">Without a language-level module system you should share functions using</p>
+		<h2>Constant Injection</h2>
+		<pre>
+			<code>module.constant('isEmptyObject',function(obj) { .. });</code>
+
+			<code>// @ngInject</code>
+			<code>function Provider(DataModelProvider, isEmptyObject) {</code>
+			<code>	if (isEmptyObject(DataModelProvider.info)) {</code>
+			<code>		this.products = [];</code>
+			<code>	}</code>
+			<code>}</code>
+		</pre>
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Angular in ES6 land</h2>
+		<p>Modules are a language construct</p>
+		<pre>
+		<code>import isEmptyObject from "./util";</code>
+		</pre>
+		<p>This works independently of Angular so it works the same throughout your application.
+			No matter which Angular version.</p>
+		<p class="red">Transpile ES6 -> ES5 today with Babel. <code>npm install babel</code></p>
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Package your JS</h2>
+		<h3 style="margin-top:-20px;"><code>npm install</code> <code>browserify</code>/<code>webpack</code>/<code>jspm</code></h3>
+
+		<pre>
+			<code>var isEmptyObject = require("./util").isEmptyObject;</code>
+
+			<code>// @ngInject</code>
+			<code>function Provider(DataModelProvider) {</code>
+			<code>	if (isEmptyObject(DataModelProvider.info)) {</code>
+			<code>		this.products = [];</code>
+			<code>	}</code>
+			<code>}</code>
+		</pre>
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>BTW: Injection in Angular 1.0 decorators</h2>
+		<p>Don't use @ngInject for Provider Decorators</p>
+		<pre>
+		<code>// @ngInject <em>Fail!</em></code>
+		<code>function datepickerDecoration($delegate,$rootScope) {</code>
+		<code>	var directive = $delegate[0]; // undefined
+		<code>}</code>
+		<code>$provide.decorator('datepickerDirective',datepickerDecoration);
+		</pre>
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Beware of The Angular modules</h2>
+		<p>It builds a single namespace for resolution. This means that you will have
+		occasional silent name clashes. Limit number of modules.</p>
+		<ol>
+			<li>Treat it as a poor mans module manager</li>
+			<li>It lacks hierachy and relative references</li>
+			<li>It gets replaced in Angular 2.0</li>
+			<li>It works for small amounts of modules but scale poorly</li>
+			<li>Don't forget; No abstraction comes for free.</li>
+		</ol>
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Also, use Native Promises</h2>
+		<p>Routers are configured during config. The resolver needs a function returning
+			a promise, but <code>$q</code> is only there after config.</p>
+		<pre class="small">
+		<code>&lt;script src="bower_components/es6-shim/es6-shim.js"&gt;&lt;/script&gt;</code>
+		<code>function AsyncDataProvider() {</code>
+		<code>	this.promise = new Promise(fetchWhenProviding);</code>
+		<code>}</code>
+		<code>AsyncDataProvider.prototype.$get = function(){ </code>
+		<code>	fetchData(this.makeInstance()); return this.instance; };</code>
+		</pre>
+
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Angular 2.0: Rather than</h2>
+		<pre>
+		<code>class Car {</code>
+		<code>  constructor() {</code>
+		<code>    this.engine = new Engine();</code>
+		<code>    this.tires = Tires.getInstance();</code>
+		<code>    this.doors = app.get('doors');</code>
+		<code>  }</code>
+		<code>}</code>
+		</pre>
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Angular 2.0: You will inject the instances</h2>
+		<pre>
+		<code>class Car {</code>
+		<code>  constructor(engine, tires, doors) {</code>
+		<code>    this.engine = engine;</code>
+		<code>    this.tires = tires;</code>
+		<code>    this.doors = doors;</code>
+		<code>  }</code>
+		<code>}</code>
+		<code>Car.$inject = ['Engine','tires','doors'];
+		</pre>
+	</div></section>
+	<!-- http://blog.thoughtram.io/angular/2015/05/03/the-difference-between-annotations-and-decorators.html -->
+	<section class="slide laid-out"><div>
+		<h2>Angular 2.0: Or with proposed ES6 decorators</h2>
+		<pre>
+		<code>class Car {</code>
+		<code>  constructor(@Inject(Engine) engine, @Inject(Tires) tires, @Inject(Doors) doors) {</code>
+		<code>    this.engine = engine;</code>
+		<code>    this.tires = tires;</code>
+		<code>    this.doors = doors;</code>
+		<code>  }</code>
+		<code>}</code>
+		</pre>
+	</div></section>
+
+	<section class="slide laid-out"><div>
+	</div></section>
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<div class="progress"><div></div></div>
+	<script src="shower/shower.min.js"></script>
+	<!-- Copyright © 2014 Yours Truly, Famous Inc. -->
+	<!-- Photos by John Carey, fiftyfootshadows.net -->
+</body>
+</html>

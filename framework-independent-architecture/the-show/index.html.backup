@@ -1,0 +1,482 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Docker Crash Course</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<!-- <link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css"> -->
+	<link rel="stylesheet" href="shower/themes/bright/styles/screen.css">
+</head>
+<body class="list">
+	<header class="caption"></header>
+		<style>
+			.swag {
+        position: absolute;
+      }
+		</style>
+	<section class="slide cover" id="Cover"><div>
+		<img src="pictures/intro.png" alt="">
+		<!--
+			To apply styles to the certain slides
+			set slide ID to get needed elements
+			-->
+		<style>
+			#Cover h2 {
+        font-weight: bold;
+				margin: 30px 0 0;
+				color:#000;
+				text-align:center;
+				font-size:120px;
+      }
+			#Cover .name {
+        margin-top: 30px;
+      }
+			#Cover p {
+        font-weight: bold;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+				margin: -40px 0 0;
+				text-align:center;
+				color:#fff;
+				font-size:50px;
+      }
+      #Cover p a {
+        color:#fff;
+        text-decoration: none;
+      }
+		</style>
+	</div></section>
+
+	<section class="slide cover">
+    <div>
+      <img src="pictures/sanguineslide.png" alt="">
+    </div>
+  </section>
+
+	<section class="slide">
+      <img src="pictures/starburst.png" alt="" class="swag">
+      <img src="pictures/swag.png" alt="">
+  </section>
+
+	<section class="slide" id="run">
+  <div>
+    <ul>
+      <li><mark>Slides</mark> - docker.sanguinebio.com</li>
+      <li><mark>Run Locally</mark> - docker run -p 3000:80 sanguinebio/docker-crash-course</li>
+      <li><mark>Repo</mark> - https://github.com/oren/docker-crash-course</li>
+    </ul>
+  </div>
+  </section>
+
+	<section class="slide">
+    <img src="pictures/maru2.png" alt="">
+    <div>
+      <ol>
+        <li>What is Docker</li>
+        <li>What does it solve</li>
+        <li>How to use it for development work flow</li>
+        <li>How to use it for deployment/production work flow</li>
+      </ol>
+    </div>
+  </section>
+
+	<section class="slide shout">
+    <div>
+      <h2>1. What is Docker</h2>
+    </div>
+  </section>
+
+	<section class="slide" id="background">
+      <img src="pictures/starburst.png" alt="" class="swag">
+    <img src="pictures/maru-hana.gif" alt="" id="maru-hana">
+    <div>
+      <h2>Background</h2>
+      <ul>
+        <li>PAAS</li>
+        <li>Heroku</li>
+        <li>DotCloud -> Docker</li>
+      </ul>
+		<style>
+			#background img#maru-hana {
+				float: right;
+        margin-top: 110px;
+      }
+		</style>
+    </div>
+  </section>
+
+	<section class="slide">
+		<img src="pictures/maru4.png" alt="">
+    <div>
+      <h2>Containers</h2>
+      <ul>
+        <li>Chroot on steroids</li>
+        <li>Isolation of filesystem, network, mounts etc</li>
+        <li>The Walmart metaphor</li>
+      </ul>
+    </div>
+  </section>
+
+	<section class="slide cover">
+    <div>
+      <img src="pictures/overview.png" alt="">
+    </div>
+  </section>
+
+	<section class="slide">
+		<img src="pictures/maru5.png" alt="">
+
+    <div>
+      <h2>Containers vs VMs</h2>
+      <ul>
+        <li>Isolated process vs isolated OS</li>
+        <li>Uses the host's kernel vs got its own kernel</li>
+        <li>Low I/O over head (disk and network) vs high overhead</li>
+      </ul>
+    </div>
+  </section>
+
+	<section class="slide cover">
+    <div>
+      <img src="pictures/vms.png" alt="">
+    </div>
+  </section>
+
+	<section class="slide">
+		<img src="pictures/paw.png" alt="">
+
+    <div>
+      <h2>Value for Development</h2>
+      <ul>
+        <li>Fast dev cycle</li>
+        <li>Quality (dev env identical to prod)</li>
+        <li>All team can take part (it's trivial to setup a project)</li>
+        <li>Laptop is clean (isolation)</li>
+        <li>Easy to switch projects</li>
+        <li>Entrepreneur mindset - autonomous teams</li>
+        <li>Micro services</li>
+      </ul>
+    </div>
+  </section>
+
+	<section class="slide" id="ops">
+    <img src="pictures/maru.gif" alt="">
+    <div>
+      <h2>Value for Ops</h2>
+      <ul>
+        <li>Fast deploy</li>
+        <li>Decrease risk of change</li>
+        <li>Production similar to Development</li>
+      </ul>
+    </div>
+		<style>
+			#ops img {
+				float: right;
+        margin-top: 110px;
+      }
+		</style>
+  </section>
+
+	<section class="slide">
+    <div>
+      <h2>Terminology and basic commands</h2>
+      <ul>
+        <li>Image     - template for container</li>
+        <li>Container - your application (isolated storage, networking, mounts, etc)</li>
+        <li>Docker registry  - a server that stores images</li>
+        <li><mark>docker push</mark>      - upload image to a repository</li>
+        <li><mark>docker pull</mark>      - download image from a repository</li>
+        <li><mark>docker build</mark>     - Dockerfile -> image</li>
+        <li><mark>docker run</mark>       - image -> container</li>
+      </ul>
+    </div>
+  </section>
+
+	<section class="slide">
+    <div>
+      <h2>Examples</h2>
+
+      <pre>
+        <code># create an image, name it web_server</code>
+        <code><mark>docker build -t web_server .</mark></code>
+        <code># create a container, name it web_server</code>
+        <code><mark>docker run --name web_server web_server</mark></code>
+      </pre>
+    </div>
+  </section>
+
+	<section class="slide cover">
+    <div>
+      <img src="pictures/flow.png" alt="">
+    </div>
+  </section>
+
+	<section class="slide cover">
+    <div>
+      <img src="pictures/echosystem.png" alt="">
+    </div>
+  </section>
+
+	<section class="slide shout">
+    <div>
+      <h2>2. What Does Docker solve</h2>
+    </div>
+  </section>
+
+	<section class="slide" id="strangler">
+		<img src="pictures/maru6.png" alt="">
+
+    <div>
+      <h2>Strangler Application</h2>
+    </div>
+		<style>
+			#strangler h2 {
+				font-size:120px;
+        /* font-weight: bold; */
+      }
+		</style>
+  </section>
+
+	<section class="slide" id="conway">
+    <img src="pictures/starburst.png" alt="" class="swag">
+		<img src="pictures/maru7.png" alt="">
+    <div>
+      <h2>Conway Law</h2>
+      <style>
+        #conway h2 {
+          font-size:120px;
+        }
+      </style>
+    </div>
+  </section>
+
+	<section class="slide cover">
+    <div>
+      <img src="pictures/conway.png" alt="">
+    </div>
+  </section>
+
+	<section class="slide cover">
+    <img src="pictures/conway-example.jpg" alt="">
+  </section>
+
+	<section class="slide cover">
+    <img src="pictures/conway-example-kingdom.jpg" alt="">
+  </section>
+
+	<section class="slide cover">
+    <img src="pictures/conway-example-kingdom-cat.jpg" alt="">
+  </section>
+
+	<section class="slide" id="inverse">
+	  <img src="pictures/upside.png" alt="">
+    <div>
+      <h2>Inverse Conway Maneuver</h2>
+      <style>
+        #inverse h2 {
+          font-size:120px;
+        }
+      </style>
+    </div>
+  </section>
+
+	<section class="slide">
+    <img src="pictures/kitten.png" alt="">
+    <div>
+      <h2>Micro Services</h2>
+      <ul>
+        <li>Benifits: scaling (apps and teams), isolation, less tech lock-in</li>
+        <li>Challenges: complexity, transactions</li>
+      </ul>
+    </div>
+  </section>
+
+	<section class="slide">
+    <div>
+      <h2>Related Points</h2>
+      <ul>
+        <li>Lean</li>
+        <li>Continuous Integration</li>
+        <li>Continuous Deployment</li>
+        <li>Immutable Infrastructure</li>
+        <li>Engineering Culture</li>
+        <li>Company Culture</li>
+      </ul>
+    </div>
+  </section>
+
+	<section class="slide cover">
+    <div>
+      <img src="pictures/rick-dalzell.jpg" alt="">
+    </div>
+  </section>
+
+	<section class="slide cover" id="amazon">
+    <img src="pictures/starburst.png" alt="" class="swag">
+    <h2>You build it - You run it!</h2>
+    <div>
+      <img src="pictures/door.jpg" alt="">
+      <style>
+        #amazon {
+          text-align: center;
+        }
+        #amazon h2 {
+          margin-top: 30px;
+          font-weight: bold;
+        }
+        #amazon .swag {
+          z-index: 1;
+        }
+      </style>
+    </div>
+  </section>
+
+	<section class="slide shout">
+    <div>
+      <h2>3. Development work flow</h2>
+    </div>
+  </section>
+
+	<section class="slide cover">
+      <img src="pictures/yak-shaving.jpg" alt="">
+  </section>
+
+	<section class="slide cover">
+    <div>
+      <img src="pictures/docker.png" alt="">
+    </div>
+  </section>
+
+	<section class="slide cover">
+    <div>
+      <img src="pictures/consul.png" alt="">
+    </div>
+  </section>
+
+	<section class="slide">
+    <div>
+      <h2>Examples (Demo time!)</h2>
+       <ul>
+         <li>Node.js project with multiple dependencies</li>
+         <li>Cordova/Android</li>
+       </ul>
+    </div>
+  </section>
+
+	<section class="slide shout">
+    <div>
+      <h2>4. Devops work flow</h2>
+    </div>
+  </section>
+
+	<section class="slide">
+    <img src="pictures/maru3.png" alt="">
+    <div>
+      <h2>What do we need for running Docker in production?</h2>
+       <ul>
+         <li>Scheduler</li>
+         <li>Discovery</li>
+         <li>Registration</li>
+       </ul>
+    </div>
+  </section>
+
+	<section class="slide cover">
+    <div>
+      <img src="pictures/scheduling.png" alt="">
+    </div>
+  </section>
+
+	<section class="slide">
+    <div>
+      <ul>
+        <li><mark class="important">Schedulers:</mark>  fleet, marathon, swarm, mesos, kubernetes, compose</li>
+        <li><mark class="important">Discovery tools:</mark> etcd, consul, zookeeper</li>
+        <li><mark class="important">Discovery +:</mark> crypt, confd, vulcand, marathon, frontrunner, synapse, nerve</li>
+      </ul>
+    </div>
+  </section>
+
+	<section class="slide">
+    <div>
+      <h2>Work flow tools</h2>
+      <p>
+        Deis, Flynn, Paz, Mesos + Marathon
+      </p>
+    </div>
+  </section>
+
+	<section class="slide cover">
+    <div>
+      <img src="pictures/cd.png" alt="">
+    </div>
+  </section>
+
+	<section class="slide shout">
+    <img src="pictures/deis-flow.png" alt="">
+  </section>
+
+	<section class="slide shout">
+    <img src="pictures/deis-architecture.png" alt="">
+  </section>
+
+	<section class="slide" id="deis-deploy">
+    <h2>Deploy a Website to Deis</h2>
+    <p><mark>deis builds:create -a my-omg-lol-app</mark></p>
+    <div>
+      <script type="text/javascript" src="https://asciinema.org/a/17842.js" id="asciicast-17842" async></script>
+    </div>
+    <style>
+			#deis-deploy {
+        text-align: center;
+      }
+			#deis-deploy p{
+        margin-top: -50px
+      }
+    </style>
+  </section>
+
+	<section class="slide" id="deis-scale">
+    <h2>Scale a website with Deis</h2>
+    <p><mark>deis scale cmd=100 -a my-omg-lol-app</mark></p>
+    <div>
+      <script type="text/javascript" src="https://asciinema.org/a/17843.js" id="asciicast-17843" async></script>
+    </div>
+    <style>
+			#deis-scale {
+        text-align: center;
+      }
+			#deis-scale p{
+        margin-top: -50px
+      }
+    </style>
+  </section>
+
+	<section class="slide" id="angular">
+    <img src="pictures/angular.png" alt="">
+  </section>
+
+	<section class="slide shout" id="thankyou">
+    <img src="pictures/starburst.png" alt="" class="swag">
+    <h2>Thank You!</h2>
+		<style>
+			#thankyou h2 {
+				/* margin: 30px 0 0; */
+				/* color:#000; */
+				text-align:center;
+				font-size:120px;
+        /* font-weight: bold; */
+      }
+		</style>
+  </section>
+
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<div class="progress"><div></div></div>
+	<script src="shower/shower.min.js"></script>
+	<!-- Copyright © 2014 Yours Truly, Famous Inc. -->
+	<!-- Photos by John Carey, fiftyfootshadows.net -->
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "name": "framework-independent-front-arch",
+  "version": "1.0.0",
+  "description": "Using your smartphone as a remote control for reveal.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "supervisor app.js"
+  },
+  "keywords": [
+    "thepian",
+    "ignorethegap",
+    "remote",
+    "control",
+    "mobile",
+    "presentation",
+    "tutorial"
+  ],
+  "author": "Henrik Vendelbo",
+  "license": "None",
+  "dependencies": {
+    "express": "^4.11.0",
+    "shower": "^1.0.15",
+    "shower-bright": "^1.0.11",
+    "shower-core": "^1.0.7",
+    "shower-notes": "0.0.6",
+    "shower-ribbon": "^1.0.11",
+    "socket.io": "^1.3.2"
+  }
+}

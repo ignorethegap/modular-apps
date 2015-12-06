@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Framework Independent Front-end Architecture</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<!-- <link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css"> -->
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<!-- <link type="text/css" rel="stylesheet" href="assets/css/styles.css" /> -->
+</head>
+<body class="list">
+
+	<!-- <form class="login"> -->
+	<!-- 	<span>What's your secret key?</span> -->
+	<!-- 	<input type="text" placeholder="Please enter your secret key!"/> -->
+	<!-- 	<input type="submit" value="➡" /> -->
+	<!-- </form> -->
+
+	<!-- <div class="reveal blurred"> -->
+	<!-- 	<div class="slides"> -->
+	<!-- 		<section data&#45;background="assets/img/1.jpg"> -->
+	<!-- 			<p>Experiment by <a class="tz&#45;link" href="http://tutorialzine.com/2015/02/smartphone&#45;remote&#45;control&#45;for&#45;presentations/">tutorial<span>zine</span></a></p> -->
+	<!-- 			<p><small>Open this presentation on your computer and smartphone. <br>Transition by swiping or pressing keyboard keys.</small></p> -->
+	<!-- 		</section> -->
+	<!-- 		<section> -->
+	<!-- 			<section data&#45;background="assets/img/2.jpg">Vertical Slide 1</section> -->
+	<!-- 			<section data&#45;background="assets/img/3.jpg">Vertical Slide 2</section> -->
+	<!-- 			<section data&#45;background="assets/img/4.jpg">Vertical Slide 3</section> -->
+	<!-- 		</section> -->
+	<!-- 		<section data&#45;background="assets/img/5.jpg">Single Horizontal Slide 2</section> -->
+	<!-- 		<section> -->
+	<!-- 			<section data&#45;background="assets/img/6.jpg">Vertical Slide 4</section> -->
+	<!-- 			<section data&#45;background="assets/img/7.jpg">Vertical Slide 5</section> -->
+	<!-- 		</section> -->
+	<!-- 	</div> -->
+	<!-- </div> -->
+
+	<!-- Including the JS libraries that we use -->
+	<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+
+	<!-- Reveal.js is for presentations -->
+	<!-- <script src="assets/revealjs/lib/js/head.min.js"></script> -->
+	<!-- <script src="assets/revealjs/js/reveal.js"></script> -->
+
+	<!-- Socket.io library -->
+	<script src="/socket.io/socket.io.js"></script>
+
+	<!-- Main JavaScript file -->
+	<script src="assets/js/script.js"></script>
+
+	<header class="caption">
+		<h1>Framework Independent Front-end Architecture</h1>
+		<p>Henrik Vendelbo (@thepian) <a href="http://ignorethegap.com">ignorethegap.com</a></p>
+	</header>
+
+	<section class="slide cover" id="Cover"><div>
+		<h2>Framework Independent Front-end Architecture</h2>
+		<p>Presented by <a href="http://twitter.com/thepian">Henrik Vendelbo</a></p>
+		<h3>Opinions ahead ...</h3>
+		<img src="pictures/anti-gravity.jpg" style="width:100%;margin-top:-10%;" alt="">
+		<!--
+			To apply styles to the certain slides
+			set slide ID to get needed elements
+			-->
+		<style>
+			.cover h3, .cover h4 {
+				color: white;
+				text-align: center;
+				font: 700 40px/1 'PT Sans Narrow', sans-serif;
+				margin:30px 0 0;
+			}
+
+			#Cover h2 {
+				margin:30px 0 0;
+				color:#FFF;
+				text-align:center;
+				font-size:70px;
+				}
+			#Cover p {
+				margin:10px 0 0;
+				text-align:center;
+				color:#FFF;
+				font-style:italic;
+				font-size:20px;
+				}
+				#Cover p a {
+					color:#FFF;
+					}
+		</style>
+	</div></section>
+
+	<style>
+	.laid-out .center {
+		display: block;
+		text-align: center;
+	}
+	.laid-out .center-block {
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.laid-out em {
+		color: red;
+	}
+	.laid-out .small {
+		font-size: .8em;
+		margin-bottom: 20px;
+	}
+	.laid-out .big {
+		font-weight: 500;
+		font-size: 2em;
+	}
+	.laid-out .overlay {
+		background-color: rgba(255,255,255,0.8);
+	}
+	</style>
+
+	<section class="slide laid-out"><div>
+		<h2>The Legacy Problem</h2>
+
+		<p>WebSite made with jQuery</p>
+
+		<p>Interactive pages made with Angular</p>
+
+				<notes>
+					I ran into a problem recently where we have the majority of the customer website implemented with plain jQuery over a number of years, and the newer parts of the website being implemented with Angular to provide a more interactive interface.
+
+					Since these two parts have a lot of functionality in common it would make sense to have a shared codebase. The best argument for that is the ability to rapidly adjust and improve the shared parts rather than the idea of cost saving which rarely pans out.
+
+					We did make some headway in making the code framework independent, but there is still room for improvement, so I will present what I have found so far and invite your comments and improvements.
+
+					The broader topic here is that the amount of JavaScript we put in our websites has grown a lot, and it needs to be managed better as a code base.
+				</notes>
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Who am I</h2>
+
+		<p>Henrik Vendelbo<br>
+		- Front-end Web Developer</p>
+
+		<notes>
+
+			<p>Full time AngularJS development for 2.5 years,
+				before that focused on high-performance JavaScript for 6 years.</p>
+			<p>In a past life I taught new employees at Microsoft how to develop with Microsoft Dynamics.</p>
+
+			<p>Right now I’m working of condensing my experiences into several workshops that aims to,</p>
+
+			<ul>
+				<li>Make your front-end code longer lived</li>
+				<li>Have a consistent user experience between Apps and Web</li>
+				<li>Get designers and developers to collaborate closer</li>
+				<li>Help Java developers live happily with “all this crazy frontend-stuff”</li>
+			</ul>
+		</notes>
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>What Architecture?</h2>
+
+		<ul>
+			<li>Composing Apps + Libs</li>
+			<li>How to write modules</li>
+			<li>Core library + Browser base</li>
+			<li>Developing and Building</li>
+			<li>Continuous Testing and Deploy</li>
+		</ul>
+
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Let's not forget</h2>
+
+		<ul>
+			<li>Environment/deployment configuration</li>
+			<li>Managing translations</li>
+			<li>Good HTML markup use</li>
+			<li>Sane common CSS</li>
+			<li>Using Sass/Less the right way</li>
+			<li>Treat URLs as an API</li>
+			<li>Modelling data on Client and Server</li>
+			<li>Caching strategy</li>
+			<li>Considering npm, bower and jspm</li>
+			<li>Keeping common vocabulary and approaches</li>
+		</ul>
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Composing Apps + Libs</h2>
+
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>How to write modules</h2>
+
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>jQuery plugins</h2>
+
+		<p>Most plugins might be too tied to the framework, but we can reduce the code size,
+		and use common paradigms.</p>
+
+		<pre><code>
+			$.fn.tooltip = function(options) {
+				return this.each(function() {
+					// boilerplate jQuery code instantiating Tooltip constructor
+				});
+
+				// constructor
+				function Tooltip() {}
+
+				// logic
+				Tooltip.prototype = {};
+			}
+			$.fn.tooltip.options = {};
+		</code></pre>
+
+	</div></section>
+
+
+	<section class="slide laid-out"><div>
+		<h2>Existing jQuery code</h2>
+
+		<p>This is a typical paradim for jQuery scripts</p>
+
+		<pre><code>
+			(function(global, $, document) {
+
+			})(window, jQuery, document);
+		</code></pre>
+
+		<notes>
+Good example of boilerplate being problematic for maintenance. The more the more
+the more dependencies you have. If you have a calling framework the the boilerplate
+you can switch the calling framework.
+		</notes>
+
+	</div></section>
+
+
+	<section class="slide laid-out"><div>
+		<h2>Core library &and; Browser base</h2>
+
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Developing and building</h2>
+
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Continuous Testing and deployment</h2>
+
+	</div></section>
+
+	<section class="slide laid-out"><div>
+	</div></section>
+
+	<div class="progress"><div></div></div>
+	<script src="shower/shower.min.js"></script>
+	<!-- Copyright © 2015 Ignore the Gap -->
+</body>
+</html>
