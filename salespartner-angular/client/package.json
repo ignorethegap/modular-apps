@@ -28,5 +28,8 @@
     "lodash": "~3.10",
     "ui-frame": "file:../../ui-frame-lib",
     "user-state": "file:../../user-state-lib"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.3.13"
   }
 }

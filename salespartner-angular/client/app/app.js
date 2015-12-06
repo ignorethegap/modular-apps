@@ -1,6 +1,6 @@
-import * from "ui-frame";
-import * from "user-state";
-import {Address} from "address";
+// import * from "ui-frame";
+// import * from "user-state";
+import Address from "address";
 
 function test() {
   var person = new Address({
@@ -11,3 +11,5 @@ function test() {
   });
   console.info('person:',person.fullName);
 }
+
+// new Promise

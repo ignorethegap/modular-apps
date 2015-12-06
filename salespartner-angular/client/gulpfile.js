@@ -62,15 +62,14 @@ var ngHtml2Js = require('browserify-ng-html2js')({
     extension: 'tpl.html'
 });
 
-// review alternative https://github.com/thoughtram/es6-babel-browserify-boilerplate/blob/master/gulpfile.js
-
 var bundler;
 function getBundler() {
   if (!bundler) {
     var conf = Object.create(watchify.args);
+    conf.entries = appEntryFile;
     conf.debug = true;
-    conf.transform = [ngHtml2Js, 'browserify-ngannotate'];
-    bundler = watchify(browserify(appEntryFile, conf));
+    conf.fullPaths = false;
+    bundler = watchify(browserify(conf));
   }
   return bundler;
 };
@@ -81,6 +80,8 @@ function bundle() {
       presets: ['es2015'],
       sourceMapRelative: __dirname
     })
+    .transform(ngHtml2Js)
+    .transform('browserify-ngannotate')
     .bundle()
     .on('error', function(err) { console.log('Error: ' + err.message); })
     .pipe(source(appOutputFile))
