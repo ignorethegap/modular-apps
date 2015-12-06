@@ -1,0 +1,25 @@
+{
+    "name": "address",
+    "version": "1.0.0",
+    "description": "Common address data model and UI",
+    "main": "none.js",
+    "scripts": {
+      "test": "./node_modules/gulp test"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/ignorethegap/modular-apps.git"
+    },
+    "keywords": [
+      "module",
+      "frontend",
+      "javascript",
+      "address"
+    ],
+    "author": "Henrik Vendelbo",
+    "license": "UNLICENSED",
+    "bugs": {
+      "url": "https://github.com/ignorethegap/modular-apps/issues"
+    },
+    "homepage": "https://github.com/ignorethegap/modular-apps#readme"
+}
