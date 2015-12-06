@@ -1,0 +1,83 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/Cellar/node/4.2.1/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'https://github.com/angular/angular.js#v1.5.0-beta.2',
+1 verbose cli   '--save-dev' ]
+2 info using npm@2.14.7
+3 info using node@v4.2.1
+4 verbose install initial load of /Users/Shared/Projects/modular-apps/salespartner-webapp/client/package.json
+5 warn package.json html5sales-webapp@1.0.0 No README data
+6 verbose installManyTop reading scoped package data from /Users/Shared/Projects/modular-apps/salespartner-webapp/client/node_modules/ui-frame/package.json
+7 verbose installManyTop reading scoped package data from /Users/Shared/Projects/modular-apps/salespartner-webapp/client/node_modules/user-state/package.json
+8 verbose readDependencies loading dependencies from /Users/Shared/Projects/modular-apps/salespartner-webapp/client/package.json
+9 silly cache add args [ 'https://github.com/angular/angular.js#v1.5.0-beta.2', null ]
+10 verbose cache add spec https://github.com/angular/angular.js#v1.5.0-beta.2
+11 silly cache add parsed spec Result {
+11 silly cache add   raw: 'https://github.com/angular/angular.js#v1.5.0-beta.2',
+11 silly cache add   scope: null,
+11 silly cache add   name: null,
+11 silly cache add   rawSpec: 'https://github.com/angular/angular.js#v1.5.0-beta.2',
+11 silly cache add   spec: 'git+https://github.com/angular/angular.js.git#v1.5.0-beta.2',
+11 silly cache add   type: 'hosted',
+11 silly cache add   hosted:
+11 silly cache add    { type: 'github',
+11 silly cache add      ssh: 'git@github.com:angular/angular.js.git#v1.5.0-beta.2',
+11 silly cache add      sshUrl: 'git+ssh://git@github.com/angular/angular.js.git#v1.5.0-beta.2',
+11 silly cache add      httpsUrl: 'git+https://github.com/angular/angular.js.git#v1.5.0-beta.2',
+11 silly cache add      gitUrl: 'git://github.com/angular/angular.js.git#v1.5.0-beta.2',
+11 silly cache add      shortcut: 'github:angular/angular.js#v1.5.0-beta.2',
+11 silly cache add      directUrl: 'https://raw.githubusercontent.com/angular/angular.js/v1.5.0-beta.2/package.json' } }
+12 verbose addRemoteGit caching https://github.com/angular/angular.js#v1.5.0-beta.2
+13 verbose addRemoteGit git+https://github.com/angular/angular.js.git#v1.5.0-beta.2 is a repository hosted by github
+14 silly tryClone cloning git+https://github.com/angular/angular.js.git#v1.5.0-beta.2 via git+https://github.com/angular/angular.js.git#v1.5.0-beta.2
+15 verbose tryClone https-github-com-angular-angular-js-git-e9a6ffc5 not in flight; caching
+16 info git [ 'clone',
+16 info git   '--template=/Users/henrikvendelbo/.npm/_git-remotes/_templates',
+16 info git   '--mirror',
+16 info git   'https://github.com/angular/angular.js.git',
+16 info git   '/Users/henrikvendelbo/.npm/_git-remotes/https-github-com-angular-angular-js-git-e9a6ffc5' ]
+17 verbose mirrorRemote git+https://github.com/angular/angular.js.git#v1.5.0-beta.2 git clone https://github.com/angular/angular.js.git
+18 verbose setPermissions git+https://github.com/angular/angular.js.git#v1.5.0-beta.2 set permissions on /Users/henrikvendelbo/.npm/_git-remotes/https-github-com-angular-angular-js-git-e9a6ffc5
+19 verbose resolveHead git+https://github.com/angular/angular.js.git#v1.5.0-beta.2 original treeish: v1.5.0-beta.2
+20 info git [ 'rev-list', '-n1', 'v1.5.0-beta.2' ]
+21 silly resolveHead git+https://github.com/angular/angular.js.git#v1.5.0-beta.2 resolved treeish: ca7f4a387c140199ca3d6de6459b4ddcde42ec81
+22 verbose resolveHead git+https://github.com/angular/angular.js.git#v1.5.0-beta.2 resolved Git URL: git+https://github.com/angular/angular.js.git#ca7f4a387c140199ca3d6de6459b4ddcde42ec81
+23 silly resolveHead Git working directory: /var/folders/cn/nz0109zn76b8zpn3bl_1v49w0000gq/T/npm-29317-0fb074d1/git-cache-a5162ad049fe/ca7f4a387c140199ca3d6de6459b4ddcde42ec81
+24 info git [ 'clone',
+24 info git   '/Users/henrikvendelbo/.npm/_git-remotes/https-github-com-angular-angular-js-git-e9a6ffc5',
+24 info git   '/var/folders/cn/nz0109zn76b8zpn3bl_1v49w0000gq/T/npm-29317-0fb074d1/git-cache-a5162ad049fe/ca7f4a387c140199ca3d6de6459b4ddcde42ec81' ]
+25 verbose cloneResolved git+https://github.com/angular/angular.js.git#v1.5.0-beta.2 clone Cloning into '/var/folders/cn/nz0109zn76b8zpn3bl_1v49w0000gq/T/npm-29317-0fb074d1/git-cache-a5162ad049fe/ca7f4a387c140199ca3d6de6459b4ddcde42ec81'...
+25 verbose cloneResolved done.
+26 info git [ 'checkout', 'ca7f4a387c140199ca3d6de6459b4ddcde42ec81' ]
+27 verbose checkoutTreeish git+https://github.com/angular/angular.js.git#v1.5.0-beta.2 checkout Note: checking out 'ca7f4a387c140199ca3d6de6459b4ddcde42ec81'.
+27 verbose checkoutTreeish
+27 verbose checkoutTreeish You are in 'detached HEAD' state. You can look around, make experimental
+27 verbose checkoutTreeish changes and commit them, and you can discard any commits you make in this
+27 verbose checkoutTreeish state without impacting any branches by performing another checkout.
+27 verbose checkoutTreeish
+27 verbose checkoutTreeish If you want to create a new branch to retain commits you create, you may
+27 verbose checkoutTreeish do so (now or later) by using -b with the checkout command again. Example:
+27 verbose checkoutTreeish
+27 verbose checkoutTreeish   git checkout -b <new-branch-name>
+27 verbose checkoutTreeish
+27 verbose checkoutTreeish HEAD is now at ca7f4a3... chore(CHANGELOG): update with changes for 1.5.0-beta.2
+28 error addLocal Could not install /var/folders/cn/nz0109zn76b8zpn3bl_1v49w0000gq/T/npm-29317-0fb074d1/git-cache-a5162ad049fe/ca7f4a387c140199ca3d6de6459b4ddcde42ec81
+29 verbose stack Error: No version provided in package.json
+29 verbose stack     at /usr/local/lib/node_modules/npm/lib/cache/add-local.js:70:17
+29 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:345:5
+29 verbose stack     at checkBinReferences_ (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:309:45)
+29 verbose stack     at final (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:343:3)
+29 verbose stack     at then (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:113:5)
+29 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:232:12
+29 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:76:16
+29 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:380:3)
+30 verbose cwd /Users/Shared/Projects/modular-apps/salespartner-webapp/client
+31 error Darwin 15.2.0
+32 error argv "/usr/local/Cellar/node/4.2.1/bin/node" "/usr/local/bin/npm" "install" "https://github.com/angular/angular.js#v1.5.0-beta.2" "--save-dev"
+33 error node v4.2.1
+34 error npm  v2.14.7
+35 error No version provided in package.json
+36 error If you need help, you may report this error at:
+36 error     <https://github.com/npm/npm/issues>
+37 verbose exit [ 1, true ]
