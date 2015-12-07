@@ -17,8 +17,12 @@
     "presentation",
     "tutorial"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ignorethegap/modular-apps.git"
+  },
   "author": "Henrik Vendelbo",
-  "license": "None",
+  "license": "UNLICENSED",
   "dependencies": {
     "express": "^4.11.0",
     "shower": "^1.0.15",

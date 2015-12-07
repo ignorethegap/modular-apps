@@ -49,6 +49,9 @@
 	<!-- Main JavaScript file -->
 	<script src="assets/js/script.js"></script>
 
+	<script src="assets/js/wordcloud.js"></script>
+
+
 	<header class="caption">
 		<h1>Framework Independent Front-end Architecture</h1>
 		<p>Henrik Vendelbo (@thepian) <a href="http://ignorethegap.com">ignorethegap.com</a></p>
@@ -118,32 +121,33 @@
 	<section class="slide laid-out"><div>
 		<h2>The Legacy Problem</h2>
 
-		<p>WebSite made with jQuery</p>
+		<img src="pictures/sites.svg" width="60%">
 
-		<p>Interactive pages made with Angular</p>
+		<notes hidden>
+			I ran into a problem recently where we have the majority of the customer website implemented with plain jQuery over a number of years, and the newer parts of the website being implemented with Angular to provide a more interactive interface.
 
-				<notes>
-					I ran into a problem recently where we have the majority of the customer website implemented with plain jQuery over a number of years, and the newer parts of the website being implemented with Angular to provide a more interactive interface.
+			Since these two parts have a lot of functionality in common it would make sense to have a shared codebase. The best argument for that is the ability to rapidly adjust and improve the shared parts rather than the idea of cost saving which rarely pans out.
 
-					Since these two parts have a lot of functionality in common it would make sense to have a shared codebase. The best argument for that is the ability to rapidly adjust and improve the shared parts rather than the idea of cost saving which rarely pans out.
+			We did make some headway in making the code framework independent, but there is still room for improvement, so I will present what I have found so far and invite your comments and improvements.
 
-					We did make some headway in making the code framework independent, but there is still room for improvement, so I will present what I have found so far and invite your comments and improvements.
-
-					The broader topic here is that the amount of JavaScript we put in our websites has grown a lot, and it needs to be managed better as a code base.
-				</notes>
+			The broader topic here is that the amount of JavaScript we put in our websites has grown a lot, and it needs to be managed better as a code base.
+		</notes>
 	</div></section>
 
 	<section class="slide laid-out"><div>
 		<h2>Who am I</h2>
 
-		<p>Henrik Vendelbo<br>
-		- Front-end Web Developer</p>
+		<img style="float:right;width:30%;" src="pictures/split-personality.gif">
+		<p>Henrik Vendelbo - Front-end Web Developer<br>
+		henrik@ignorethegap.com</p>
 
-		<notes>
+		<ul>
+			<li>Full time AngularJS development for 2.5 years</li>
+			<li>Focused on high-performance JavaScript for 6 years</li>
+			<li>In a past life I taught new employees at Microsoft how to develop with Microsoft Dynamics.</li>
+		</ul>
 
-			<p>Full time AngularJS development for 2.5 years,
-				before that focused on high-performance JavaScript for 6 years.</p>
-			<p>In a past life I taught new employees at Microsoft how to develop with Microsoft Dynamics.</p>
+		<notes hidden>
 
 			<p>Right now I’m working of condensing my experiences into several workshops that aims to,</p>
 
@@ -164,17 +168,31 @@
 			<li>How to write modules</li>
 			<li>Core library + Browser base</li>
 			<li>Developing and Building</li>
-			<li>Continuous Testing and Deploy</li>
 		</ul>
 
 	</div></section>
 
 	<section class="slide laid-out"><div>
 		<h2>Let's not forget</h2>
+		<!-- <canvas id="lets-not-forget" style="position:absolute;left:5em;right:5em;top: 6em; bottom: 3em;width:500px;height:400px;"></canvas> -->
+		<script type="none">
+		WordCloud(document.getElementById('lets-not-forget'), { list: [
+			["",2],
+			["Environment/deployment configuration",2],
+			["Managing translations",2],
+			["Good HTML markup use",2],
+			["Sane common CSS",2],
+			["Using Sass/Less the right way",2],
+			["Treat URLs as an API",2],
+			["Modelling data on Client and Server",2],
+			["Caching strategy",2],
+			["Considering npm, bower and jspm",2],
+			["Keeping common vocabulary and approaches",2]
+		] } );
+		</script>
 
 		<ul>
-			<li>Environment/deployment configuration</li>
-			<li>Managing translations</li>
+			<li>Managing translations and deployment configuration</li>
 			<li>Good HTML markup use</li>
 			<li>Sane common CSS</li>
 			<li>Using Sass/Less the right way</li>
@@ -183,16 +201,70 @@
 			<li>Caching strategy</li>
 			<li>Considering npm, bower and jspm</li>
 			<li>Keeping common vocabulary and approaches</li>
+			<li>Continuous Testing and Deploy</li>
 		</ul>
 	</div></section>
 
 	<section class="slide laid-out"><div>
 		<h2>Composing Apps + Libs</h2>
 
+		<p>Layers vs Isolated Silos of Apps and Libs</p>
+
+		<img src="pictures/composition.svg" width="70%">
+
 	</div></section>
 
 	<section class="slide laid-out"><div>
-		<h2>How to write modules</h2>
+		<h2>IE8 RIP</h2>
+		<img src="pictures/rip-IE-8.jpg" style="position:absolute;left:60%;width:30%;">
+
+		<ul>
+			<li>Custom tag names allowed</li>
+			<li>Standard Events</li>
+			<li>Vary: Accept-Language</li>
+			<li>Vector Graphics (SVG)</li>
+		</ul>
+
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Modern JS</h2>
+
+		<p>We need a cheat sheet for equivalents to jQuery/Angular APIs</p>
+
+		<ul>
+			<li>Templated multi line strings `${this.firstName} ${this.lastName}`</li>
+			<li>$.extend -> Object.create</li>
+			<li>$q -> Promise</li>
+			<li>Collections: Map, Set, Weak Map, Weak Set</li>
+			<li>npm install core-js -> polyfills</li>
+		</ul>
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Enhanced Standard Lib</h2>
+
+		<p>We need a cheat sheet for equivalents to jQuery/Angular APIs</p>
+
+		<ul>
+			<li>jQuery.find -> document.querySelectorAll</li>
+			<li>.addClass .removeClass -> el.classList</li>
+			<li>etc. etc.</li>
+			<li>SystemJS (module management)</li>
+			<li>lodash - utility functions</li>
+		</ul>
+
+	</div></section>
+
+	<section class="slide laid-out"><div>
+		<h2>Managing Apps and Libs</h2>
+		<img src="pictures/manage-modules.png" style="width: 40%; margin-left: 10%;">
+
+	</div></section>
+
+
+	<section class="slide laid-out"><div>
+		<h2>How to write Modules</h2>
 
 	</div></section>
 
@@ -231,7 +303,7 @@
 			})(window, jQuery, document);
 		</code></pre>
 
-		<notes>
+		<notes hidden>
 Good example of boilerplate being problematic for maintenance. The more the more
 the more dependencies you have. If you have a calling framework the the boilerplate
 you can switch the calling framework.
@@ -240,6 +312,7 @@ you can switch the calling framework.
 	</div></section>
 
 
+<!--
 	<section class="slide laid-out"><div>
 		<h2>Core library &and; Browser base</h2>
 
@@ -254,8 +327,23 @@ you can switch the calling framework.
 		<h2>Continuous Testing and deployment</h2>
 
 	</div></section>
+-->
 
-	<section class="slide laid-out"><div>
+ 	<section class="slide cover on-black"><div>
+		<h2>2 day Workshop in February</h2>
+		<p>Hands on working through old/new code styles <br>for jQuery and Angular.</p>
+
+		<h2>http://ignorethegap.com</h2>
+
+		<img src="pictures/cookies.jpg" style="position:absolute; left:60%; top:10%; width:40%;" alt="">
+		<style>
+		.slide.on-black h2 {
+			color: white;
+		}
+		.slide.on-black p {
+			color: red;
+		}
+		</style>
 	</div></section>
 
 	<div class="progress"><div></div></div>

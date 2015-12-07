@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="516px" height="218px" viewBox="0 0 516 218" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.2 (15855) - http://www.bohemiancoding.com/sketch -->
+    <title>composition</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <rect id="Rectangle-1" stroke="#979797" fill="#D8D8D8" sketch:type="MSShapeGroup" x="1" y="1" width="81" height="216"></rect>
+        <text id="Legacy" sketch:type="MSTextLayer" font-family="Helvetica" font-size="12" font-weight="normal" fill="#000000">
+            <tspan x="20" y="97">Legacy</tspan>
+            <tspan x="20" y="111"></tspan>
+            <tspan x="20" y="125">Website</tspan>
+        </text>
+        <rect id="Rectangle-6" stroke="#979797" fill="#D8D8D8" sketch:type="MSShapeGroup" x="99" y="1" width="116" height="108"></rect>
+        <text id="Migrated" sketch:type="MSTextLayer" font-family="Helvetica" font-size="12" font-weight="normal" fill="#000000">
+            <tspan x="122" y="44">Migrated</tspan>
+            <tspan x="122" y="58"></tspan>
+            <tspan x="122" y="72">Website</tspan>
+        </text>
+        <rect id="Rectangle-2" stroke="#979797" fill="#D8D8D8" sketch:type="MSShapeGroup" x="99" y="146" width="81" height="71"></rect>
+        <text id="Header-/" sketch:type="MSTextLayer" font-family="Helvetica" font-size="12" font-weight="normal" fill="#000000">
+            <tspan x="114" y="173">Header /</tspan>
+            <tspan x="114" y="187">Footer /</tspan>
+            <tspan x="114" y="201">Navigation</tspan>
+        </text>
+        <rect id="Rectangle-2" stroke="#979797" fill="#D8D8D8" sketch:type="MSShapeGroup" x="434" y="146" width="81" height="71"></rect>
+        <text id="Future" sketch:type="MSTextLayer" font-family="Helvetica" font-size="12" font-weight="normal" fill="#000000">
+            <tspan x="446" y="175">Future</tspan>
+            <tspan x="446" y="189">Navigation</tspan>
+        </text>
+        <rect id="Rectangle-4" stroke="#979797" fill="#D8D8D8" sketch:type="MSShapeGroup" x="195" y="146" width="113" height="71"></rect>
+        <text id="User-+-Session" sketch:type="MSTextLayer" font-family="Helvetica" font-size="12" font-weight="normal" fill="#000000">
+            <tspan x="211" y="175">User + Session</tspan>
+            <tspan x="211" y="189">Tracking</tspan>
+        </text>
+        <rect id="Rectangle-5" stroke="#979797" fill="#D8D8D8" sketch:type="MSShapeGroup" x="321" y="146" width="100" height="71"></rect>
+        <text id="Common" sketch:type="MSTextLayer" font-family="Helvetica" font-size="12" font-weight="normal" fill="#000000">
+            <tspan x="346" y="167">Common</tspan>
+            <tspan x="346" y="181">Data</tspan>
+            <tspan x="346" y="195">Models</tspan>
+        </text>
+        <rect id="Rectangle-7" stroke="#979797" fill="#D8D8D8" sketch:type="MSShapeGroup" x="434" y="1" width="81" height="108"></rect>
+        <text id="Native" sketch:type="MSTextLayer" font-family="Helvetica" font-size="12" font-weight="normal" fill="#000000">
+            <tspan x="448" y="37">Native</tspan>
+            <tspan x="448" y="51">App</tspan>
+            <tspan x="448" y="65">Web</tspan>
+            <tspan x="448" y="79">Content</tspan>
+        </text>
+        <rect id="Rectangle-8" stroke="#979797" fill="#D8D8D8" sketch:type="MSShapeGroup" x="232" y="1" width="89" height="108"></rect>
+        <text id="Angular" sketch:type="MSTextLayer" font-family="Helvetica" font-size="12" font-weight="normal" fill="#000000">
+            <tspan x="248" y="43">Angular</tspan>
+            <tspan x="248" y="57"></tspan>
+            <tspan x="248" y="71">Webapp</tspan>
+        </text>
+        <rect id="Rectangle-9" stroke="#979797" fill="#D8D8D8" sketch:type="MSShapeGroup" x="337" y="1" width="84" height="108"></rect>
+        <text id="Other" sketch:type="MSTextLayer" font-family="Helvetica" font-size="12" font-weight="normal" fill="#000000">
+            <tspan x="352" y="42">Other</tspan>
+            <tspan x="352" y="56"></tspan>
+            <tspan x="352" y="70">Webapp</tspan>
+        </text>
+    </g>
+</svg>
