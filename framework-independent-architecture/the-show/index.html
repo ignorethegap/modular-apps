@@ -262,31 +262,44 @@
 
 	</div></section>
 
+	<section class="slide laid-out"><div>
+		<!-- <img src="pictures/paw.png" style="position:absolute; top:0;left:0;right:0;bottom:0;"> -->
+		<h2>Model-View Viewmodel (MVVM)</h2>
+
+		<p>Framework independent approach</p>
+
+
+	</div></section>
+
 
 	<section class="slide laid-out"><div>
 		<h2>How to write Modules</h2>
 
+		<p style="color:red;">Work in progress</p>
+
+		<pre><code>import * as $ from 'jquery';
+import * as angular from 'angular';
+
+export {Header,Footer};
+		</pre></code>
 	</div></section>
 
 	<section class="slide laid-out"><div>
 		<h2>jQuery plugins</h2>
+		<p>Most plugins are tightly coupled, but we can invert the dependency.</p>
 
-		<p>Most plugins might be too tied to the framework, but we can reduce the code size,
-		and use common paradigms.</p>
+		<pre><code style="font-size: 60%;">$.fn.tooltip = function(options) {
+	return this.each(function() {
+		// boilerplate jQuery code instantiating Tooltip constructor
+	});
 
-		<pre><code>
-			$.fn.tooltip = function(options) {
-				return this.each(function() {
-					// boilerplate jQuery code instantiating Tooltip constructor
-				});
+	// constructor
+	function Tooltip() {}
 
-				// constructor
-				function Tooltip() {}
-
-				// logic
-				Tooltip.prototype = {};
-			}
-			$.fn.tooltip.options = {};
+	// logic
+	Tooltip.prototype = {};
+}
+$.fn.tooltip.options = {};
 		</code></pre>
 
 	</div></section>
@@ -297,10 +310,9 @@
 
 		<p>This is a typical paradim for jQuery scripts</p>
 
-		<pre><code>
-			(function(global, $, document) {
+		<pre><code>(function(global, $, document) {
 
-			})(window, jQuery, document);
+})(window, jQuery, document);
 		</code></pre>
 
 		<notes hidden>
@@ -311,6 +323,22 @@ you can switch the calling framework.
 
 	</div></section>
 
+	<section class="slide cover on-black"><div>
+		<h2>The toolbox</h2>
+
+		<p>Writing code should be so hard, the toolbox:</p>
+
+		<ul>
+			<li>Angular 1 cheat sheet</li>
+			<li>jQuery cheat sheet</li>
+			<li>Standard Lib cheat sheet</li>
+			<li>CLI for managing libs and apps</li>
+			<li>ESnext build chain</li>
+		</ul>
+
+		<img src="pictures/coffee.jpg" style="position:absolute; left:60%; top:10%; width:40%;" alt="">
+
+	</div></section>
 
 <!--
 	<section class="slide laid-out"><div>
@@ -337,7 +365,8 @@ you can switch the calling framework.
 
 		<img src="pictures/cookies.jpg" style="position:absolute; left:60%; top:10%; width:40%;" alt="">
 		<style>
-		.slide.on-black h2 {
+		.slide.on-black h2,
+		.slide.on-black li {
 			color: white;
 		}
 		.slide.on-black p {
