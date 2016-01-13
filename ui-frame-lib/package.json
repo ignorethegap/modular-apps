@@ -4,22 +4,31 @@
     "description": "Common ground for all modules and apps. In your own company you might break these out as separate repositories",
     "main": "none.js",
     "scripts": {
-      "test": "./node_modules/gulp test"
+        "test": "./node_modules/gulp test"
     },
     "repository": {
-      "type": "git",
-      "url": "git+https://github.com/ignorethegap/modular-apps.git"
+        "type": "git",
+        "url": "git+https://github.com/ignorethegap/modular-apps.git"
     },
     "keywords": [
-      "module",
-      "frontend",
-      "javascript",
-      "apps"
+        "module",
+        "frontend",
+        "javascript",
+        "apps"
     ],
     "author": "Henrik Vendelbo",
     "license": "UNLICENSED",
     "bugs": {
-      "url": "https://github.com/ignorethegap/modular-apps/issues"
+        "url": "https://github.com/ignorethegap/modular-apps/issues"
     },
-    "homepage": "https://github.com/ignorethegap/modular-apps#readme"
+    "homepage": "https://github.com/ignorethegap/modular-apps#readme",
+    "dependencies": {
+        "lodash": "^3.10.1"
+    },
+    "devDependencies": {
+        "babel": "^5.4.7",
+        "babel-runtime": "^5.8.19",
+        "gulp": "~3.9.0",
+        "gulp-babel": "^5.1.0"
+    }
 }

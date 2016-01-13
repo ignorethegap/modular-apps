@@ -45,6 +45,10 @@ great common npm modules
 
 module format for jQuery, Angular, Ember, React
 
+### Principles of build
+
+Keep project build in single file 'gulpfile.js'
+
 
 Improvements:
 
