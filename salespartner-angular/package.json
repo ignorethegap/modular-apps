@@ -4,8 +4,8 @@
     "description": "Common ground for all modules and apps. In your own company you might break these out as separate repositories",
     "main": "none.js",
     "scripts": {
-        "start": "gulp dev",
-        "test": "gulp test"
+        "build": "../node_modules/.bin/gulp build",
+        "test": "../node_modules/.bin/gulp test"
     },
     "repository": {
         "type": "git",
@@ -29,11 +29,11 @@
         "ui-frame": "file:../../ui-frame-lib",
         "user-state": "file:../../user-state-lib"
     },
-    "devDependencies": {
-        "babel-preset-es2015": "~6.3.13",
-        "babel": "~5.4.7",
-        "babel-runtime": "~5.8.19",
-        "gulp": "~3.9.0",
-        "gulp-babel": "~5.1.0"
+    "peerDependencies": {
+        "babel-core": "~6.3",
+        "babel-preset-es2015": "~6.3",
+        "babel-register": "~6.3",
+        "gulp": "~3.9",
+        "gulp-babel": "~6.1"
     }
 }
