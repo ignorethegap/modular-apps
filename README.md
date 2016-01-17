@@ -53,3 +53,5 @@ Keep project build in single file 'gulpfile.js'
 Improvements:
 
 make a module based on jQuery common compatible
+
+show how to set libs up using `generator-babel-boilerplate`

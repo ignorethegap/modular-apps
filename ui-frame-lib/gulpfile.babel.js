@@ -9,14 +9,15 @@ import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
 import source  from 'vinyl-source-stream';
 
-// import mochaGlobals from './test/setup/.globals';
+//- import mochaGlobals from './test/setup/.globals';
 import manifest  from './package.json';
 
 // Load all of our Gulp plugins
+// They can be accessed as a map. So `gulp-foo` can be used as `$.foo`.
 const $ = loadPlugins();
 
 // Gather the library data from `package.json`
-const config = manifest.babelBoilerplateOptions;
+const paths = manifest.paths;
 const mainFile = manifest.main;
 const destinationFolder = path.dirname(mainFile);
 const exportFileName = path.basename(mainFile, path.extname(mainFile));
@@ -78,20 +79,23 @@ function lint(files) {
     .pipe($.eslint.format())
     .pipe($.eslint.failOnError())
     .pipe($.jscs())
-    .pipe($.jscs.reporter('fail'))
+    // .pipe($.jscs.reporter('fail'))
     .on('error', onError);
 }
 
+// Lint JS source skipping test source code
 function lintSrc() {
-  return lint(['js/**/*.js','!*.spec.js']);
+  return lint([paths.source+'/**/*.js','!*.spec.js']);
 }
 
+// Lint test Specs
 function lintTest() {
   return lint('*.spec.js');
 }
 
+// Lint of Gulp file
 function lintGulpfile() {
-  return lint('gulpfile.babel.js');
+  // return lint('gulpfile.babel.js');
 }
 
 
@@ -106,8 +110,9 @@ gulp.task('js', function() {
       .pipe(fs.createWriteStream(__dirname + '/bundle.js'));
 });
 
-var srcFiles      = ['lib/**/*.js'];
+var srcFiles      = [paths.source+'/**/*.js'];
 
+// Make ES5 version of the source code
 function build() {
   return gulp.src(srcFiles)
     .pipe($.babel({
@@ -118,7 +123,7 @@ function build() {
         "runtime"
       ]
     }))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest(paths.dist));
 }
 
 function watch() {

@@ -4,6 +4,7 @@
     "description": "Common ground for all modules and apps. In your own company you might break these out as separate repositories",
     "main": "none.js",
     "scripts": {
+        "doc": "../node_modules/.bin/docco gulpfile.babel.js js/*.js",
         "lint": "../node_modules/.bin/gulp lint",
         "build": "../node_modules/.bin/gulp build",
         "test": "../node_modules/.bin/gulp test"
@@ -24,6 +25,13 @@
         "url": "https://github.com/ignorethegap/modular-apps/issues"
     },
     "homepage": "https://github.com/ignorethegap/modular-apps#readme",
+    "paths": {
+        "docs": "docs",
+        "styles": "styles",
+        "source": "js",
+        "e2e": "test",
+        "dist": "dist"
+    },
     "dependencies": {
         "lodash": "~3.10"
     },
