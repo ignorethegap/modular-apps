@@ -1,20 +1,21 @@
 <!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sales Partner app</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="mobile-web-app-capable" content="yes">
-    
-    <link rel="stylesheet" href="assets/all.css" type="text/css">
-  </head>
-  <body ng-app="salespartner">
-    <header ui-frame-header></header>
-    <aside ui-frame-menu></aside>
-    <main ui-view></main>
-    <footer ui-frame-footer></footer>
-
-    <script src="assets/app.js"></script>
-  </body>
+<html lang="en" ng-app="application">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sales partner Portal</title>
+        <link href="./assets/all.css" rel="stylesheet" type="text/css">
+        <script href="./assets/app.js"></script>
+    </head>
+    <body>
+        <div class="grid-frame vertical">
+            <div class="grid-content shrink" style="padding: 0;">
+                <ul class="primary condense menu-bar">
+                    <li><a><strong>Foundation for Apps</strong></a></li>
+                </ul>
+            </div>
+            <div ui-view class="grid-content">
+            </div>
+        </div>
+    </body>
 </html>
