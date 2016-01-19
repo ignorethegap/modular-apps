@@ -33,6 +33,7 @@
         "babel-core": "~6.3",
         "babel-preset-es2015": "~6.3",
         "babel-register": "~6.3",
+        "fast-frontend-development": "1.0.0",
         "gulp": "~3.9",
         "gulp-babel": "~6.1"
     }
