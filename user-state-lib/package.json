@@ -4,6 +4,8 @@
     "description": "Common ground for all modules and apps. In your own company you might break these out as separate repositories",
     "main": "none.js",
     "scripts": {
+        "pack": "../node_modules/.bin/webpack",
+        "watch": "../node_modules/.bin/webpack --watch",
         "build": "../node_modules/.bin/gulp build",
         "test": "../node_modules/.bin/gulp test"
     },

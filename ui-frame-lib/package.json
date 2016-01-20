@@ -4,6 +4,7 @@
     "description": "Common ground for all modules and apps. In your own company you might break these out as separate repositories",
     "main": "index.js",
     "scripts": {
+        "pack": "../node_modules/.bin/webpack",
         "watch": "../node_modules/.bin/webpack --watch",
         "doc": "../node_modules/.bin/docco gulpfile.babel.js js/*.js",
         "lint": "../node_modules/.bin/gulp lint",
@@ -27,6 +28,7 @@
     },
     "homepage": "https://github.com/ignorethegap/modular-apps#readme",
     "paths": {
+        "appEntry": "../index.js",
         "docs": "docs",
         "styles": "styles",
         "source": "js",

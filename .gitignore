@@ -7,3 +7,5 @@ coverage
 !.idea/runConfigurations
 *.launch
 es-sample-lib/dist
+ui-frame-lib/dist
+salespartner-angular/dist
