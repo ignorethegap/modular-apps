@@ -1,72 +1,84 @@
 {
-    "name": "ui-frame",
-    "version": "1.0.0",
-    "description": "Common ground for all modules and apps. In your own company you might break these out as separate repositories",
-    "main": "index.js",
-    "scripts": {
-        "doc": "../node_modules/.bin/docco gulpfile.babel.js js/*.js",
-        "lint": "../node_modules/.bin/gulp lint",
-        "build": "../node_modules/.bin/gulp build",
-        "test": "../node_modules/.bin/gulp test"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/ignorethegap/modular-apps.git"
-    },
-    "keywords": [
-        "module",
-        "frontend",
-        "javascript",
-        "apps"
-    ],
-    "author": "Henrik Vendelbo",
-    "license": "UNLICENSED",
-    "bugs": {
-        "url": "https://github.com/ignorethegap/modular-apps/issues"
-    },
-    "homepage": "https://github.com/ignorethegap/modular-apps#readme",
-    "paths": {
-        "docs": "docs",
-        "styles": "styles",
-        "source": "js",
-        "e2e": "test",
-        "dist": "dist"
-    },
-    "dependencies": {
-        "lodash": "~3.10"
-    },
-    "devDependencies": {
-    },
-    "peerDependencies": {
-        "babel-core": "~6.3",
-        "babel-loader": "~6.2",
-        "babel-preset-es2015": "~6.3",
-        "babel-register": "~6.3",
-        "fast-frontend-development": "1.0.0",
-        "gulp": "~3.9",
-        "gulp-babel": "~6.1",
-        "gulp-cached": "~1.1",
-        "gulp-concat": "~2.6",
-        "gulp-connect": "~2.2",
-        "gulp-eslint": "~1.1",
-        "gulp-filter": "~3.0",
-        "gulp-flatten": "~0.2",
-        "gulp-htmlhint": "~0.3",
-        "gulp-istanbul": "~0.10",
-        "gulp-jscs": "~3.0",
-        "gulp-load-plugins": "~1.1",
-        "gulp-mocha": "~2.2",
-        "gulp-plumber": "~1.0",
-        "gulp-postcss": "~6.0",
-        "gulp-remember": "~0.3",
-        "gulp-rename": "~1.2",
-        "gulp-rev": "~6.0",
-        "gulp-riot": "~0.4",
-        "gulp-sass": "~2.1",
-        "gulp-sourcemaps": "~1.6",
-        "gulp-tap": "~0.1",
-        "gulp-uglify": "~1.5",
-        "gulp-util": "~3.0",
-        "gulp-webserver": "~0.9"
-    }
+  "name": "ui-frame",
+  "version": "1.0.0",
+  "description": "Common ground for all modules and apps. In your own company you might break these out as separate repositories",
+  "main": "index.js",
+  "scripts": {
+    "doc": "../node_modules/.bin/docco gulpfile.babel.js js/*.js",
+    "lint": "../node_modules/.bin/gulp lint",
+    "js": "../node_modules/.bin/gulp js",
+    "build": "../node_modules/.bin/gulp build",
+    "test": "../node_modules/.bin/gulp test",
+    "karma-once": "../node_modules/.bin/karma start karma.conf.js --single-run --log-level debug",
+    "karma-server": "../node_modules/.bin/karma start karma.conf.js",
+    "karma-trigger": "../node_modules/.bin/karma run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ignorethegap/modular-apps.git"
+  },
+  "keywords": [
+    "module",
+    "frontend",
+    "javascript",
+    "apps"
+  ],
+  "author": "Henrik Vendelbo",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/ignorethegap/modular-apps/issues"
+  },
+  "homepage": "https://github.com/ignorethegap/modular-apps#readme",
+  "paths": {
+    "docs": "docs",
+    "styles": "styles",
+    "source": "js",
+    "e2e": "test",
+    "dist": "dist"
+  },
+  "dependencies": {
+    "lodash": "~3.10"
+  },
+  "devDependencies": {
+  },
+  "peerDependencies": {
+    "babel-core": "~6.3",
+    "babel-loader": "~6.2",
+    "babel-preset-es2015": "~6.3",
+    "babel-preset-es2015-rollup": "~1.1",
+    "babel-register": "~6.3",
+    "fast-frontend-development": "1.0.0",
+    "gulp": "~3.9",
+    "gulp-babel": "~6.1",
+    "gulp-cached": "~1.1",
+    "gulp-concat": "~2.6",
+    "gulp-connect": "~2.2",
+    "gulp-eslint": "~1.1",
+    "gulp-filter": "~3.0",
+    "gulp-flatten": "~0.2",
+    "gulp-htmlhint": "~0.3",
+    "gulp-istanbul": "~0.10",
+    "gulp-jscs": "~3.0",
+    "gulp-load-plugins": "~1.1",
+    "gulp-mocha": "~2.2",
+    "gulp-plumber": "~1.0",
+    "gulp-postcss": "~6.0",
+    "gulp-remember": "~0.3",
+    "gulp-rename": "~1.2",
+    "gulp-rev": "~6.0",
+    "gulp-riot": "~0.4",
+    "gulp-sass": "~2.1",
+    "gulp-sourcemaps": "~1.6",
+    "gulp-tap": "~0.1",
+    "gulp-uglify": "~1.5",
+    "gulp-util": "~3.0",
+    "gulp-webserver": "~0.9",
+    "karma": "~0.13",
+    "karma-firefox-launcher": "~0.1",
+    "karma-jasmine": "~0.3",
+    "karma-phantomjs-launcher": "~1.0",
+    "karma-rollup-preprocessor": "~2.0",
+    "rollup": "~0.25",
+    "rollup-plugin-babel": "~2.3"
+  }
 }

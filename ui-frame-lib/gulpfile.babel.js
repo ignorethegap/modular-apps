@@ -5,9 +5,8 @@ import glob  from 'glob';
 import path  from 'path';
 import fs from 'fs';
 import {Instrumenter} from 'isparta';
-import webpack from 'webpack';
-import webpackStream from 'webpack-stream';
 import source  from 'vinyl-source-stream';
+import {server as karmaServer} from 'karma';
 
 //- import mochaGlobals from './test/setup/.globals';
 import manifest  from './package.json';
@@ -41,7 +40,7 @@ gulp.task('lint-gulpfile', lintGulpfile);
 gulp.task('lint', ['lint-src', 'lint-test', 'lint-gulpfile']);
 
 // Build two versions of the library
-gulp.task('build', ['lint', 'clean'], build);
+gulp.task('build', ['lint', 'clean', 'js'], build);
 
 // Lint and run our tests
 gulp.task('test', ['lint'], test);
@@ -130,8 +129,11 @@ function watch() {
   gulp.watch(srcFiles, ['build']);
 }
 
-function test() {
-
+function test(done) {
+    return karmaServer.start({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+    }, done);
 }
 
 function testBrowser() {
