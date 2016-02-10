@@ -57,3 +57,5 @@ make a module based on jQuery common compatible
 show how to set libs up using `generator-babel-boilerplate`
 
 Change management; Some parts should have little or no dependencies to avoid revolutions. The further down the stack it is the more it must evolve. The apps can experiment but the underlying libraries must be well encapsulated and free to evolve avoiding both stagnation and upheaval.
+
+CSS Next processing as alternative to SASS/Less.
