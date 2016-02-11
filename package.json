@@ -44,7 +44,7 @@
     "domain": "0.0.1",
     "es6-module-loader": "^0.17.8",
     "eslint": "~1.10.3",
-    "fast-frontend-development": "1.0.0",
+    "fast-frontend-development": "file:fast-frontend-development",
     "glob": "~6.0.3",
     "gulp": "~3.9.0",
     "gulp-babel": "~6.1",
