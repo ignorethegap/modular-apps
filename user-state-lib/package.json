@@ -29,6 +29,14 @@
         "url": "https://github.com/ignorethegap/modular-apps/issues"
     },
     "homepage": "https://github.com/ignorethegap/modular-apps#readme",
+    "paths": {
+      "docs": "docs",
+      "styles": "styles",
+      "source": "js",
+      "e2e": "test",
+      "dist": "dist",
+      "specPattern": "**/*.spec.js"
+    },
     "dependencies": {
         "lodash": "^3.10.1"
     },

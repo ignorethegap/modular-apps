@@ -4,8 +4,9 @@
   "description": "Common ground for all modules and apps. In your own company you might break these out as separate repositories",
   "main": "none.js",
   "scripts": {
-    "karma-once": "karma start ui-frame-lib/karma.conf.js --single-run --log-level debug",
-    "test": "karma start ui-frame-lib/karma.conf.js --single-run"
+    "karma-firefox": "karma start ui-frame-lib/karma.conf.js --browsers Firefox",
+    "test-once": "karma start ui-frame-lib/karma.conf.js --single-run --log-level debug",
+    "test": "karma start ui-frame-lib/karma.conf.js --single-run --browsers PhantomJS --reporters dots --log-level warn"
   },
   "repository": {
     "type": "git",
@@ -46,6 +47,7 @@
     "domain": "0.0.1",
     "es6-module-loader": "^0.17.8",
     "eslint": "~1.10.3",
+    "fast-frontend-development": "1.0.0",
     "glob": "~6.0.3",
     "gulp": "~3.9.0",
     "gulp-babel": "~6.1",

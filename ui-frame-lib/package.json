@@ -34,7 +34,8 @@
     "styles": "styles",
     "source": "js",
     "e2e": "test",
-    "dist": "dist"
+    "dist": "dist",
+    "specPattern": "**/*.spec.js"
   },
   "dependencies": {
     "lodash": "~3.10"
