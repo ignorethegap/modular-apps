@@ -63,7 +63,7 @@ exports.karmaConfig = function(base, manifests, options) {
 
         // put module in test based on its manifest
         config.preprocessors[path.join(location, specPattern)] = ['rollup'];
-        config.files.push( source + '/' + specPattern );
+        config.files.push( path.join(location, source, specPattern) );
     });
 
     return config;

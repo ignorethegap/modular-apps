@@ -6,6 +6,7 @@
     "scripts": {
         "watch": "../node_modules/.bin/webpack --watch",
         "build": "../node_modules/.bin/gulp build",
+        "karma-once": "../node_modules/.bin/karma start karma.conf.js --single-run --log-level debug",
         "test": "../node_modules/.bin/gulp test"
     },
     "repository": {
