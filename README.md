@@ -1,5 +1,7 @@
 ## Modular apps
 
+[![Build Status](https://travis-ci.org/ignorethegap/modular-apps.svg)](https://travis-ci.org/ignorethegap/modular-apps)
+
 Common ground for all modules and apps. In your own company you might break these out as separate repositories
 
 ### Up and running
