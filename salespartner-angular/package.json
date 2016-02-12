@@ -32,7 +32,8 @@
         "appEntry": "app.js",
         "views": "client/views",
         "e2e": "test",
-        "dist": "dist"
+        "dist": "dist",
+        "specPattern": "**/*.spec.js"
     },
     "dependencies": {
         "address": "file:../address-lib",
