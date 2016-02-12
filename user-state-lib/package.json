@@ -80,6 +80,8 @@
         "karma-jasmine": "~0.3",
         "karma-phantomjs-launcher": "~1.0",
         "karma-rollup-preprocessor": "~2.0",
+        "karma-eslint": "*",
+        "karma-coverage": "*",
         "rollup": "~0.25",
         "rollup-plugin-babel": "~2.3"
     }

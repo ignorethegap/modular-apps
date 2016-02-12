@@ -9,7 +9,7 @@ exports.karmaConfig = function(base, manifests, options) {
 
         browsers: ['PhantomJS'], // 'Firefox', PhantomJS
         frameworks: ['jasmine'],
-        // reporters: ['progress','coverage', 'html'],
+        reporters: ['progress','coverage', 'html'],
 
         // enable/disable colors in output
         colors: true,
@@ -21,19 +21,35 @@ exports.karmaConfig = function(base, manifests, options) {
         preprocessors: {},
 
         plugins: [
+            'karma-eslint',
             'karma-jasmine',
+            'karma-coverage',
             'karma-firefox-launcher',
             'karma-phantomjs-launcher',
             'karma-rollup-preprocessor'
         ],
 
+        eslint: {
+            stopOnError: false,
+            stopOnWarning: true
+        },
+
+        // optionally, configure the reporter
+        coverageReporter: {
+          type : 'html',
+          dir : 'coverage/'
+        },
+
         rollupPreprocessor: {
-            rollup: {},
+            rollup: {
+                plugins: []
+            },
             bundle: {
                 sourceMap: 'inline'
             }
         }
     };
+
     /*
     config.rollupPreprocessor.rollup.plugins = [
         require('rollup-plugin-istanbul')({
@@ -62,9 +78,15 @@ exports.karmaConfig = function(base, manifests, options) {
             source = manifest.paths.source || 'js';
 
         // put module in test based on its manifest
-        config.preprocessors[path.join(location, specPattern)] = ['rollup'];
+        config.preprocessors[path.join(location, specPattern)] = ['eslint',/*'coverage',*/'rollup'];
         config.files.push( path.join(location, source, specPattern) );
     });
+
+    config.rollupPreprocessor.rollup.plugins.push(
+        require('rollup-plugin-istanbul')({
+            exclude: config.files // if source files are added to config.files a separate list must be maintained
+        })
+    );
 
     return config;
 };

@@ -35,10 +35,10 @@
         "dist": "dist"
     },
     "dependencies": {
-        "address": "file:../../address-lib",
+        "address": "file:../address-lib",
         "lodash": "~3.10",
-        "ui-frame": "file:../../ui-frame-lib",
-        "user-state": "file:../../user-state-lib"
+        "ui-frame": "file:../ui-frame-lib",
+        "user-state": "file:../user-state-lib"
     },
     "peerDependencies": {
         "babel-core": "~6.3",
@@ -46,6 +46,8 @@
         "babel-register": "~6.3",
         "fast-frontend-development": "*",
         "gulp": "~3.9",
-        "gulp-babel": "~6.1"
+        "gulp-babel": "~6.1",
+        "karma-eslint": "*",
+        "karma-coverage": "*"
     }
 }
