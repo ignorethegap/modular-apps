@@ -73,9 +73,17 @@ exports.karmaConfig = function(base, manifests, options) {
     // apply each of the modules
     manifests.forEach(function(location) {
         var manifest = require( path.join(base, location, 'package.json') );
+        if (!manifest) {
+            console.warn('No package.json in',location);
+            return;
+        }
+        if (!manifest.paths) {
+            console.warn('No paths information in the package.json for',location);
+        }
 
-        var specPattern = manifest.paths.specPattern || '**/*.spec.js',
-            source = manifest.paths.source || 'js';
+        var paths = manifest.paths || {},
+            specPattern = paths.specPattern || '**/*.spec.js',
+            source = paths.source || 'js';
 
         // put module in test based on its manifest
         config.preprocessors[path.join(location, specPattern)] = ['eslint',/*'coverage',*/'rollup'];
