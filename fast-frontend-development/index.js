@@ -1,15 +1,18 @@
 var path = require('path'),
-    fs = require('fs');
+    fs = require('fs'),
+    rollupPluginIstanbul = require('rollup-plugin-istanbul');
 /**
  * manifests : array of relative paths to modules
  */
 exports.karmaConfig = function(base, manifests, options) {
+    var specPaths = [];
+
     var config = {
         basePath: base,
 
-        browsers: ['PhantomJS'], // 'Firefox', PhantomJS
+        browsers: ['Firefox'], // 'Firefox', PhantomJS
         frameworks: ['jasmine'],
-        reporters: ['progress','coverage', 'html'],
+        reporters: ['progress','coverage', 'kjhtml'],
 
         // enable/disable colors in output
         colors: true,
@@ -22,8 +25,10 @@ exports.karmaConfig = function(base, manifests, options) {
 
         plugins: [
             'karma-eslint',
+            'karma-jscs-preprocessor',
             'karma-jasmine',
             'karma-coverage',
+            'karma-jasmine-html-reporter',
             'karma-firefox-launcher',
             'karma-phantomjs-launcher',
             'karma-rollup-preprocessor'
@@ -82,12 +87,29 @@ exports.karmaConfig = function(base, manifests, options) {
         }
 
         var paths = manifest.paths || {},
-            specPattern = paths.specPattern || '**/*.spec.js',
+            specPattern = paths.specPattern || '*.spec.js',
+            jsPattern = paths.jsPattern || '*.js',
+            jsExtension = jsPattern.replace('*',''),
+            jsIncludePattern = '{'+location+','+path.join(location, '!(test|vendor)','**}', '!('+specPattern.replace(jsExtension,'')+')'+jsExtension),
             source = paths.source || 'js';
 
+        // console.log(jsIncludePattern);
+
+        config.preprocessors[jsIncludePattern] =  [
+            // 'jscs', 
+            'eslint' 
+        ];
+
+        specPaths.push(path.join(location, '**', specPattern)); 
+
+        config.files.push( path.join(location, source, '**', specPattern) );
+    });
+
+    specPaths.forEach(function(specPath) {
         // put module in test based on its manifest
-        config.preprocessors[path.join(location, specPattern)] = ['eslint',/*'coverage',*/'rollup'];
-        config.files.push( path.join(location, source, specPattern) );
+        config.preprocessors[specPath] = [
+            'rollup'
+            ];
     });
 
     config.rollupPreprocessor.rollup.plugins.push(

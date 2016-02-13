@@ -5,6 +5,8 @@
     "main": "none.js",
     "scripts": {
         "build": "../node_modules/.bin/gulp build",
+        "karma-server": "../node_modules/.bin/karma start karma.conf.js",
+        "karma-once": "../node_modules/.bin/karma start karma.conf.js --single-run --log-level debug",
         "test": "../node_modules/.bin/gulp test"
     },
     "repository": {
@@ -29,7 +31,7 @@
       "source": "js",
       "e2e": "test",
       "dist": "dist",
-      "specPattern": "**/*.spec.js"
+      "specPattern": "*.spec.js"
     },
     "dependencies": {
         "lodash": "^3.10.1"

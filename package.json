@@ -92,6 +92,8 @@
     "karma-eslint": "~2.0",
     "karma-firefox-launcher": "~0.1",
     "karma-jasmine": "~0.3",
+    "karma-jasmine-html-reporter": "^0.2.0",
+    "karma-jscs-preprocessor": "^0.1.0",
     "karma-phantomjs-launcher": "~1.0",
     "karma-rollup-preprocessor": "~2.0",
     "lodash": "~3.10",
