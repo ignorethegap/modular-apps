@@ -1,6 +1,8 @@
-import fs from 'fs';
+// import fs from 'fs';
 
-export function main() {
+export default function main() {
+
+	console.log('MAIN');
 
     return 0;
 }
