@@ -36,14 +36,18 @@ exports.karmaConfig = function(base, manifests, options) {
         ],
 
         eslint: {
-            stopOnError: false,
-            stopOnWarning: true
+            stopOnError: true,
+            stopOnWarning: false
         },
 
         // optionally, configure the reporter
         coverageReporter: {
           type : 'html',
           dir : 'coverage/'
+        },
+
+        proxies: {
+            '/assets/': path.join(__dirname, 'public/assets') + '/'
         },
 
         rollupPreprocessor: {
@@ -80,7 +84,7 @@ exports.karmaConfig = function(base, manifests, options) {
             specDir = paths.specDir || source,
             specMatch = '{'+path.join(location,specDir)+','+ path.join(location, specDir, '!(vendor)}');
 
-        console.log(jsIncludePattern, specMatch, sourceMatch);
+        // console.log(jsIncludePattern, specMatch, sourceMatch);
 
         config.preprocessors[jsIncludePattern] =  [
             // 'jscs',
@@ -89,6 +93,8 @@ exports.karmaConfig = function(base, manifests, options) {
 
         jsPaths.push(jsIncludePattern);
         specPaths.push(path.join(specMatch, '**', specPattern));
+
+        //TODO add proxies entry for coverage in each location
     });
 
     jsPaths.forEach(function(jsPath) {
