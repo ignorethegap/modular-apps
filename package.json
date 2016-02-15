@@ -102,7 +102,7 @@
     "phantomjs-prebuilt": "~2.1",
     "postcss-cssnext": "~2.4",
     "proxyquireify": "^3.0.0",
-    "rewireify": "^0.2.5",
+    "rewireify": "~0.2",
     "rollup": "~0.25",
     "rollup-plugin-babel": "~2.3",
     "rollup-plugin-istanbul": "~1.0",

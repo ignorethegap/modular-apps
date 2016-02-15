@@ -7,8 +7,13 @@ describe('for-name', function() {
 
     it('should click on input when label is clicked');
 
-    xit('fails', function() {
+    xit('boolean fails', function() {
         expect(false).toBe(true);
+    });
+
+    it('should be implemented', function() {
+    	expect(forName).toBeDefined();
+    	forName();
     });
 
     it('should have helper function', function() {

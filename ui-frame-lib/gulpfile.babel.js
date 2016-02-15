@@ -143,3 +143,22 @@ function testBrowser() {
 function coverage() {
 
 }
+
+gulp.task('rollup', function() {
+  var rollup = require('rollup');
+
+  rollup.rollup({
+    entry: 'index.js',
+    format: 'es6',
+    onwarn: function(message) {
+      console.warn(message);
+    },
+    plugins: [
+    ]
+  }).then(function(bundle) {
+    var code = bundle.generate({
+      format: 'es6'
+    }).code;
+    console.log(code);
+  });
+});
