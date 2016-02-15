@@ -1,7 +1,13 @@
 {
   "parser": "babel-eslint",
-  "ecmaFeatures": {
-  	"modules": true
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "impliedStrict": true,
+      "modules": true
+    }
   },
   "rules": {
     "strict": 0

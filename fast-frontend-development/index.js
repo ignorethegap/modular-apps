@@ -5,7 +5,7 @@ var path = require('path'),
  * manifests : array of relative paths to modules
  */
 exports.karmaConfig = function(base, manifests, options) {
-    var specPaths = [];
+    var specPaths = [], jsPaths = [];
 
     var config = {
         basePath: base,
@@ -56,19 +56,6 @@ exports.karmaConfig = function(base, manifests, options) {
         }
     };
 
-    /*
-    config.rollupPreprocessor.rollup.plugins = [
-        require('rollup-plugin-istanbul')({
-            exclude: ['** /*.spec.js'],
-        }),
-        require('rollup-plugin-babel')({
-            presets: [
-                require('babel-preset-es2015-rollup')
-            ]
-        })
-    ];
-    */
-
     // fit in custom options
     for(var n in options) { config[n] = options[n]; }
 
@@ -90,18 +77,22 @@ exports.karmaConfig = function(base, manifests, options) {
             source = paths.source || 'js',
             sourceMatch = '{'+path.join(location,source)+','+ path.join(location, source, '!(test|vendor)}'),
             jsIncludePattern = path.join(sourceMatch, '!('+specPattern.replace(jsExtension,'')+')'+jsExtension),
-            specDir = paths.specDir || source;
+            specDir = paths.specDir || source,
+            specMatch = '{'+path.join(location,specDir)+','+ path.join(location, specDir, '!(vendor)}');
 
-        // console.log(jsIncludePattern);
+        console.log(jsIncludePattern, specMatch, sourceMatch);
 
         config.preprocessors[jsIncludePattern] =  [
             // 'jscs',
             'eslint'
         ];
 
-        specPaths.push(path.join(sourceMatch, '**', specPattern));
+        jsPaths.push(jsIncludePattern);
+        specPaths.push(path.join(specMatch, '**', specPattern));
+    });
 
-        // config.files.push( path.join(location, source, '**', specPattern) );
+    jsPaths.forEach(function(jsPath) {
+        config.files.push( { pattern:jsPath, included:false, watched: true });
     });
 
     specPaths.forEach(function(specPath) {
@@ -112,13 +103,11 @@ exports.karmaConfig = function(base, manifests, options) {
             ];
 
         config.files.push( specPath );
-
-        //TODO config.files.push( {pattern: path.join(location, source, jsPattern), included:false, watched: true} )
     });
 
     config.rollupPreprocessor.rollup.plugins.push(
         rollupPluginIstanbul({
-            exclude: config.files, // if source files are added to config.files a separate list must be maintained
+            exclude: specPaths, // if source files are added to config.files a separate list must be maintained
             instrumenterConfig: {
                 // http://gotwarlost.github.io/istanbul/public/apidocs/classes/Instrumenter.html#method_Instrumenter
                 esModules: true
@@ -126,7 +115,6 @@ exports.karmaConfig = function(base, manifests, options) {
         })
     );
 
-    /*
     config.rollupPreprocessor.rollup.plugins.push(
                 require('rollup-plugin-babel')({
             presets: [
@@ -134,9 +122,8 @@ exports.karmaConfig = function(base, manifests, options) {
             ]
         })
     );
-    */
 
-    console.log('karma CONFIG',config);
+    // console.log('karma CONFIG',config);
 
     return config;
 };

@@ -11,8 +11,8 @@
     "test": "npm run -s test:build && npm run -s karma-once",
     "test:build": "../node_modules/.bin/rollup ./index.js > .tmp/test.bundle.js",
     "karma-run": "../node_modules/.bin/karma run",
-    "karma-once": "../node_modules/.bin/karma start karma.conf.js --browsers Chrome --single-run --log-level debug",
-    "karma-server": "../node_modules/.bin/karma start karma.conf.js --browsers Chrome --log-level debug",
+    "karma-once": "../node_modules/.bin/karma start karma.conf.js --single-run --log-level debug",
+    "karma-server": "../node_modules/.bin/karma start karma.conf.js --log-level debug",
     "karma-trigger": "../node_modules/.bin/karma run"
   },
   "repository": {
