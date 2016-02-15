@@ -29,6 +29,7 @@ exports.karmaConfig = function(base, manifests, options) {
             'karma-jasmine',
             'karma-coverage',
             'karma-jasmine-html-reporter',
+            'karma-chrome-launcher',
             'karma-firefox-launcher',
             'karma-phantomjs-launcher',
             'karma-rollup-preprocessor'
@@ -90,33 +91,42 @@ exports.karmaConfig = function(base, manifests, options) {
             specPattern = paths.specPattern || '*.spec.js',
             jsPattern = paths.jsPattern || '*.js',
             jsExtension = jsPattern.replace('*',''),
-            jsIncludePattern = '{'+location+','+path.join(location, '!(test|vendor)','**}', '!('+specPattern.replace(jsExtension,'')+')'+jsExtension),
-            source = paths.source || 'js';
+            source = paths.source || 'js',
+            sourceMatch = '{'+path.join(location,source)+','+ path.join(location, source, '!(test|vendor)}'),
+            jsIncludePattern = path.join(sourceMatch, '!('+specPattern.replace(jsExtension,'')+')'+jsExtension),
+            specDir = paths.specDir || source;
 
         // console.log(jsIncludePattern);
 
         config.preprocessors[jsIncludePattern] =  [
-            // 'jscs', 
-            'eslint' 
+            // 'jscs',
+            'eslint'
         ];
 
-        specPaths.push(path.join(location, '**', specPattern)); 
+        specPaths.push(path.join(sourceMatch, '**', specPattern));
 
-        config.files.push( path.join(location, source, '**', specPattern) );
+        // config.files.push( path.join(location, source, '**', specPattern) );
     });
 
     specPaths.forEach(function(specPath) {
         // put module in test based on its manifest
+
         config.preprocessors[specPath] = [
             'rollup'
             ];
+
+        config.files.push( specPath );
+
+        //TODO config.files.push( {pattern: path.join(source, jsPattern), included:false, watched: true} )
     });
 
     config.rollupPreprocessor.rollup.plugins.push(
-        require('rollup-plugin-istanbul')({
+        rollupPluginIstanbul({
             exclude: config.files // if source files are added to config.files a separate list must be maintained
         })
     );
+
+    // console.log('karma CONFIG',config);
 
     return config;
 };

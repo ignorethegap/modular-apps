@@ -9,8 +9,9 @@
     "js": "../node_modules/.bin/gulp js",
     "build": "../node_modules/.bin/gulp build",
     "test": "../node_modules/.bin/gulp test",
-    "karma-once": "../node_modules/.bin/karma start karma.conf.js --single-run --log-level debug",
-    "karma-server": "../node_modules/.bin/karma start karma.conf.js",
+    "karma-run": "../node_modules/.bin/karma run",
+    "karma-once": "../node_modules/.bin/karma start karma.conf.js --browsers Chrome --single-run --log-level debug",
+    "karma-server": "../node_modules/.bin/karma start karma.conf.js --browsers Chrome --log-level debug",
     "karma-trigger": "../node_modules/.bin/karma run"
   },
   "repository": {
