@@ -1,4 +1,4 @@
-class Address {
+export default class Address {
     constructor(addr) {
         this.firstName = addr.firstName;
         this.lastName = addr.lastName;
@@ -8,4 +8,3 @@ class Address {
         return `${this.firstName} ${this.lastName}`;
     }
 }
-export {Address}

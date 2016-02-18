@@ -1,2 +1,1 @@
-import Address from './js/address';
-export {Address}
+export default Address from './js/address';
