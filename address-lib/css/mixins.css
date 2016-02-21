@@ -1,0 +1,74 @@
+// circles
+@mixin circleEmpty($size) {
+  display: block;
+  width: $size;
+  height: $size;
+  line-height: $size;
+  @include border-radius($size/2);
+}
+
+@mixin circle($size, $color) {
+  background: $color;
+  display: block;
+  width: $size;
+  height: $size;
+  line-height: $size;
+  @include border-radius($size/2);
+}
+
+// triangle
+
+@mixin triangle($size, $color, $direction) {
+  height: 0;
+  width: 0;
+
+  @if ($direction == up) or ($direction == down) or ($direction == right) or ($direction == left) {
+    border-color: transparent;
+    border-style: solid;
+    border-width: $size / 2;
+
+    @if $direction == up {
+      border-bottom-color: $color;
+    } @else if $direction == right {
+      border-left-color: $color;
+    } @else if $direction == down {
+      border-top-color: $color;
+    } @else if $direction == left {
+      border-right-color: $color;
+    }
+  } @else if ($direction == up-right) or ($direction == up-left) {
+    border-top: $size solid $color;
+
+    @if $direction == up-right {
+      border-left: $size solid transparent;
+    } @else if $direction == up-left {
+      border-right: $size solid transparent;
+    }
+  } @else if ($direction == down-right) or ($direction == down-left) {
+    border-bottom: $size solid $color;
+
+    @if $direction == down-right {
+      border-left: $size solid transparent;
+    } @else if $direction == down-left {
+      border-right: $size solid transparent;
+    }
+  }
+}
+
+@mixin size-headings($h1-size,$h2-size,$h3-size,$h4-size,$h5-size,$h6-size) {
+  h1, .h1 { font-size: $h1-size; }
+  h2, .h2 { font-size: $h2-size; }
+  h3, .h3 { font-size: $h3-size; }
+  h4, .h4 { font-size: $h4-size; }
+  h5, .h5 { font-size: $h5-size; }
+  h6, .h6 { font-size: $h6-size; }
+}
+
+@mixin color-headings($h1-color,$h2-color,$h3-color,$h4-color,$h5-color,$h6-color) {
+  h1, .h1 { color: $h1-color; }
+  h2, .h2 { color: $h2-color; }
+  h3, .h3 { color: $h3-color; }
+  h4, .h4 { color: $h4-color; }
+  h5, .h5 { color: $h5-color; }
+  h6, .h6 { color: $h6-color; }
+}
