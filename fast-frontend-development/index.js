@@ -1,4 +1,5 @@
 var path = require('path'),
+    debug = require('debug')('karmaConfig'),
     fs = require('fs'),
     rollupPluginIstanbul = require('rollup-plugin-istanbul');
 /**
