@@ -131,6 +131,7 @@ exports.karmaConfig = function(base, manifests, options) {
     );
 
     // console.log('karma CONFIG',config);
+    debug(options.title, config);
 
     return config;
 };
