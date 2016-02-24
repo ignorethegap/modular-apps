@@ -8,4 +8,6 @@ To debug build steps you can get extra information through the `DEBUG` env varia
 This is a shortcut for
 
     DEBUG=* karma start karma.conf.js --single-run --log-level debug
+
+The log level parameter is specific to Karma
     
