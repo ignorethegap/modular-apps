@@ -1,0 +1,48 @@
+---
+# This playbook configures and installs dependencies of odoo.
+
+###########################
+##   REVISION WELCOME    ##
+## BEST PRACTICE WELCOME ##
+###########################
+
+# Suggestion: virtualenv with pip http://docs.ansible.com/easy_install_module.html#examples
+
+- name: install the obligatory dependencies
+  apt: name={{ item }} state=installed
+  with_items:
+    - gzip
+    - postgresql
+    - python2
+    - python2-babel
+    - python2-dateutil
+    - python2-docutils
+    - python2-egenix-mx-base
+    - python2-feedparser
+    - python2-gdata
+    - python2-jinja
+    - python2-ldap
+    - python2-lxml
+    - python2-mako
+    - python2-mock
+    - python2-openid
+    - python2-pillow
+    - python2-psutil
+    - python2-psycopg2
+    - python2-pychart
+    - python2-pydot
+    - python2-pyparsing
+    - python2-pytz
+    - python2-pywebdav
+    - python2-reportlab
+    - python2-simplejson
+    - python2-unittest2
+    - python2-vatnumber
+    - python2-vobject
+    - python2-werkzeug
+    - python2-xlwt
+    - python2-yaml
+    - zsi
+    - wkhtmltopdf
+  tags: obligatory_dependencies
+  

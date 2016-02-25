@@ -1,0 +1,5 @@
+---
+# This playbook handles notifications common to all nodes.
+
+- name: restart the ntp daemon
+  service: name=ntpd state=restarted

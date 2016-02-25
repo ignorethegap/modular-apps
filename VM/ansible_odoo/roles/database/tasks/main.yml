@@ -1,0 +1,4 @@
+---
+# This playbook contains plays that will be run on database nodes.
+
+- include: postgresql.yml tags=postgresql

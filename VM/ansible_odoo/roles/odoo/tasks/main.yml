@@ -1,0 +1,5 @@
+---
+# This playbook contains plays that will be run on odoo-server nodes.
+
+#- include: dependencies.yml tags=dependencies
+- include: odoo.yml tags=odoo

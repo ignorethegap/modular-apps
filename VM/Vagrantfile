@@ -1,25 +1,76 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.configure("2") do |config|
+#####################################################################################
+# Script for Installation: ODOO Saas4/Trunk server on Arch Linux
+# Author: David Arnold, El Aleman S.A.S, 2014
+#------------------------------------------------------------------------------------
+# Puspose: Fire up a ODOO environemtn quickly, flexibly and conveniently, that works
+# Status: ##################### IN DEVELOPEMENT #####################################
+# Prerequisites: Virtualbox, Vagrant
+# Usage: command 'vagrant up' in the folder of the vagrantfile
+#####################################################################################
 
-  # config.vm.box = "primalskill/ubuntu-trusty64"
-  # config.vm.box = "debian/wheezy64"
-  config.vm.box = "ubuntu/trusty64"
-  config.vm.host_name = "odoo-dev"
-  # config.vm.network :private_network, ip: "192.168.0.42"
-  config.vm.network :forwarded_port, host: 8069, guest: 8069, auto_correct: true
 
-  # TODO "../sales.website.com", "../website.com"
-  # config.vm.synced_folder "addons", "/home/vagrant/addons", create: true
+#####################################################################################
+##################### SCRIPTS TO BE REMOVED AS VAGRANT ENHANCES #####################
+#####################################################################################
 
-  config.vm.provider "virtualbox" do |vb|
-    # vb.name = "Ignore Odoo"
-    vb.customize ["modifyvm", :id, "--memory", "2048"]
-    # vb.customize ["modifyvm", :id, "--name", "odoo-dev" ]
-  end
+# sed -i -e '1ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-security main restricted universe multiverse\' /etc/apt/sources.list
+# sed -i -e '1ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-backports main restricted universe multiverse\' /etc/apt/sources.list
+# sed -i -e '1ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty-updates main restricted universe multiverse\' /etc/apt/sources.list
+# sed -i -e '1ideb mirror://mirrors.ubuntu.com/mirrors.txt trusty main restricted universe multiverse\' /etc/apt/sources.list
 
-  config.vm.provision "shell" do |s|
-    s.path = "script.sh"
-  end
+$getansible = <<SCRIPT
+ sed -i.old -e 's/^/#/' /etc/apt/sources.list
+ sed -i -e '1ideb http://mirror.edatel.net.co/ubuntu/ trusty-security main restricted universe multiverse\' /etc/apt/sources.list
+ sed -i -e '1ideb-src http://mirror.edatel.net.co/ubuntu/ trusty-security main restricted universe multiverse\' /etc/apt/sources.list
+ sed -i -e '1ideb http://mirror.edatel.net.co/ubuntu/ trusty-backports main restricted universe multiverse\' /etc/apt/sources.list
+ sed -i -e '1ideb-src http://mirror.edatel.net.co/ubuntu/ trusty-backports main restricted universe multiverse\' /etc/apt/sources.list
+ sed -i -e '1ideb http://mirror.edatel.net.co/ubuntu/ trusty-updates main restricted universe multiverse\' /etc/apt/sources.list
+ sed -i -e '1ideb-src http://mirror.edatel.net.co/ubuntu/ trusty-updates main restricted universe multiverse\' /etc/apt/sources.list
+ sed -i -e '1ideb http://mirror.edatel.net.co/ubuntu/ trusty main restricted universe multiverse\' /etc/apt/sources.list
+ sed -i -e '1ideb-src http://mirror.edatel.net.co/ubuntu/ trusty main restricted universe multiverse\' /etc/apt/sources.list
+
+ sudo apt-get -q -y update
+ sudo apt-get -q -y install software-properties-common
+ sudo apt-add-repository ppa:rquillo/ansible
+ sudo apt-get -q -y update
+ sudo apt-get -q -y install ansible
+SCRIPT
+
+
+#####################################################################################
+#                             VAGRANT MAGIC BEGINS HERE                             #
+#-----------------------------------------------------------------------------------#
+#          For full documentation on vagrant please visit www.vagrantup.com!        #
+#####################################################################################
+
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  
+  
+  # Every Vagrant virtual environment requires a box to build off of.
+  config.vm.box = "trusty-server-cloudimg-i386-vagrant-disk"
+  config.vm.box_url = 'https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-vagrant-disk1.box'
+  
+  # Needed to acces openerp on its default port 8069 on the host machine. (localhost:8069)
+  config.vm.network :forwarded_port, guest: 8069, host: 8049
+  
+  # Only needed if you want to browse DB from pgadmin or some other pg tool
+  # config.vm.network :forwarded_port, host: 4321, guest: 5432
+  
+  
+  # Invoke the scripts to prepare for ansible power
+  config.vm.provision :shell, inline: $getansible
+  
+  
+  # The command is run in local-mode on the guest with inventory "127.0.0.1," - comma important to trick the interpreter.
+  config.vm.provision :shell, inline: "ansible-playbook /vagrant/ansible_odoo/playbook.yml -i '127.0.0.1,' --connection=local"
+
+  
 end

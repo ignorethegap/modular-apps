@@ -1,0 +1,35 @@
+---
+# This playbook prepares and executes installation of odoo from source on odoo nodes.
+
+## Occasionally check for updates, if error occurs:
+## https://help.github.com/articles/what-are-github-s-ssh-key-fingerprints
+
+
+- name: Clone the Git with ref "{{ OE_VERSION }}"
+  git: repo=https://github.com/odoo/odoo.git dest="{{ OE_HOME_EXT }}" depth=1 force=no version="{{ OE_VERSION }}" accept_hostkey=true
+  
+- name: Ensure GROUP is set up properly
+  group: name="{{ OE_USER }}" state=present
+ 
+- name: Ensure ODOO user is set up properly
+  user: name="{{ OE_USER }}" group="{{ OE_USER }}" home="{{ OE_HOME }}" move_home=yes createhome=no system=yes state=present
+  
+- name: Ensure custom module directory exists
+  file: path="{{ OE_HOME }}/custom/addons" owner="{{ OE_USER }}" group="{{ OE_USER }}" state=directory
+  
+- name: Ensure server config file is asembled from template, exists and is at the right place
+  template: src=odoo-server.j2 dest=/etc/{{ OE_CONFIG }}.conf owner="{{ OE_USER }}" group="{{ OE_USER }}" mode=640
+
+- name: Ensure statrup script meets configuration
+  template: src=start.sh.j2 dest="/opt/start.sh" owner="{{ OE_USER }}" group="{{ OE_USER }}" mode=775
+  remote_user: "{{ OE_USER }}"
+
+- name: Ensure initscript script is present and meets configuration
+  template: src=systemd.j2 dest=/usr/lib/systemd/system/{{ OE_CONFIG }}.service group=root mode=755
+
+- name: Start ODOO Server and enable on stratup
+  service: name="{{ OE_CONFIG }}" state=started enabled=yes
+
+- name: Done! Try one of the following ip with port :8069 - or accordingly, if adapted in vagrantfile
+  debug: var=ansible_all_ipv4_addresses
+

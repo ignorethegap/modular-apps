@@ -1,0 +1,38 @@
+---
+## fixed parameters
+# Enter version for checkout, posible values
+# Examples: 7.0 saas-3 saas-4 master
+# Accepts: Full 40-character SHA-1 hash, the literal string HEAD, a branch name, or a tag name.
+OE_VERSION: saas-4
+
+# openerp, when change update around line 40 on vagrantfile for convenience
+OE_USER: odoo
+OE_HOME: /opt/{{ OE_USER }}
+OE_HOME_EXT: /opt/{{ OE_USER }}/{{ OE_VERSION }}-server
+
+#set the superadmin password
+OE_SUPERADMIN: superadminpassword
+OE_CONFIG: "{{ OE_USER }}-{{ OE_VERSION }}-server"
+
+
+# Hint@me for a hardened arch-linux setup and good ideas.
+
+# country code for downloading at local mirrors set up
+#
+# AU AT BY BE BR BG CA CL CN CO CZ DK EE FI FR DE GR HK HU IS IN
+# ID IE IL IT JP KZ KR LV LU MK NL NC NZ NO PL PT RO RU RS SG SK
+# ZA ES LK SE CH TW TR UA GB US UZ VN all
+country_code: "CO"
+
+# whether or not to force a mirrorlist update on every run
+update_mirrorlist: false
+
+# the network time protocol servers to utilize
+ntp_servers:
+  - "0.us.pool.ntp.org"
+  - "1.us.pool.ntp.org"
+  - "2.us.pool.ntp.org"
+  - "3.us.pool.ntp.org"
+
+# *** DO NOT EDIT BELOW THIS LINE ***
+ansible_python_interpreter: /usr/bin/python2
