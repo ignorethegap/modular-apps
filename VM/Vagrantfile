@@ -1,0 +1,25 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  # config.vm.box = "primalskill/ubuntu-trusty64"
+  # config.vm.box = "debian/wheezy64"
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.host_name = "odoo-dev"
+  # config.vm.network :private_network, ip: "192.168.0.42"
+  config.vm.network :forwarded_port, host: 8069, guest: 8069, auto_correct: true
+
+  # TODO "../sales.website.com", "../website.com"
+  # config.vm.synced_folder "addons", "/home/vagrant/addons", create: true
+
+  config.vm.provider "virtualbox" do |vb|
+    # vb.name = "Ignore Odoo"
+    vb.customize ["modifyvm", :id, "--memory", "2048"]
+    # vb.customize ["modifyvm", :id, "--name", "odoo-dev" ]
+  end
+
+  config.vm.provision "shell" do |s|
+    s.path = "script.sh"
+  end
+end
