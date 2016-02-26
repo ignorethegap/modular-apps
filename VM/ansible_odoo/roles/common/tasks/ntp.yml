@@ -1,8 +1,13 @@
 ---
 # This playbook configures NTP (Network Time Protocol) on all nodes.
 
-- name: install the ntp package
+- name: install the ntp package (Debian)
   apt: name=ntp state=installed
+  when: ansible_os_family == 'Debian'
+
+- name: install the ntp package (RedHat)
+  yum: name=ntp state=installed  
+  when: ansible_os_family == 'RedHat'
 
 - name: configure the ntp daemon
   template: src=ntp.conf.j2 dest=/etc/ntp.conf
