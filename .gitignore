@@ -2,6 +2,7 @@ node_modules
 !node_modules/fast-frontend-development
 npm-debug.log
 coverage
+.vagrant
 .tmp
 .bin
 .DS_Store
