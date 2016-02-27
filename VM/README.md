@@ -1,13 +1,15 @@
 
 Installing Vagrant directly from https://www.vagrantup.com or use how to.
 
+A maintained Ansible playbook is at GitHub osiell/ansible-odoo
+
 OSX
 ---
 
 ```
 brew install docker docker-machine
 brew install caskroom/cask/brew-cask
-brew cask install virtualbox
+brew cask install Caskroom/cask/virtualbox
 brew cask install vagrant
 brew case install vagrant-manager
 ```
@@ -33,3 +35,9 @@ http://www.theopensourcerer.com/2014/09/how-to-install-openerp-odoo-8-on-ubuntu-
 & run
 
 sudo update-rc.d odoo-server defaults
+
+Vagrant
+-------
+
+* `vagrant destroy` to get rid of the current vagrant guest build
+* `vagrant provision` to re-build VM

@@ -2,64 +2,76 @@
 
 [![Build Status](https://travis-ci.org/ignorethegap/modular-apps.svg)](https://travis-ci.org/ignorethegap/modular-apps)
 
-Common ground for all modules and apps. In your own company you might break these out as separate repositories
+Collection of sample Website, Web App, Mobile App, Iconography and common Libraries.
+In your own company you might break these out as separate repositories
 
-### Up and running
+### website.com
+
+In website.com you have a jQuery based site that was written a while ago and still works fine.
+Some of the functionality is needed in apps so you want to extract it to common libraries.
+
+### sales.website.com
+
+In sales.website.com you have an Angular based web app for partners and sales agents.
+
+
+Dependencies
+------------
+
+* VirtualBox
+* Vagrant 1.6.1
+* Ansible
+
+Setup
+-----
+
+### Up and running without a backend
+
+You can develop without a backend limiting the amount of testing possible.
 
 ```
 npm install
 npm start
 ```
 
-### html5demoapp.com
+### Odoo backend
 
-This is the new site we are building which uses the common module style.
+As a sample backend Odoo represents your own Enterprise systems (ERP/CRM/etc)
 
-### Legacy site
-
-In legacy-site you have a jQuery based site that was written a while ago and still works fine but the code cannot
-be shared with your WebApp and iOS content.
-
-### html5sales-angular
-
-In html5sales-angular you have an Angular based web app.
+1. Download and Install Ansible http://docs.ansible.com/intro_installation.html
 
 
+1. Download and install vagrant (the OR based wget allows COVETEL people to get it from a local mirror)
 
-Objectives:
+   ```
+$ wget http://mirror/files/deb/vagrant_1.6.2_x86_64.deb || wget http://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.3_x86_64.deb
+$ sudo dpkg -i vagrant_1.6.2_x86_64.deb
 
-Assemble the App according to your framework but base in on modules that are framework independent.
+   ```
 
-Leverage modern JavaScript Language, Standard Lib, Idomatic Libs.
+1. Setup vagrant box.
 
-Enable sharing code between existing jQuery based website and newer Angular/Ember/React web apps.
+   ```
+$ vagrant box add debian7 http://iweb.dl.sourceforge.net/project/vagrantdebianboxes/debianwheezy.box
 
-Strong Testing Tools
+   ```
 
-Strong Component Model/Conventions
+1. Clone this repository
 
+   ```
+$ git clone https://github.com/Covetel/odoo-vagrant.git
 
+   ```
+1. Create `addons` directory
 
+   ```
+$ cd odoo-vagrant
+$ mkdir ../addons
+   ```
+1. Edit file `script.sh` and set `$MIRROR_IP` to your IP address mirror.
+1. Vagrant up
 
-common simple expressions - util functions, DOM, native lib, language
-
-great common npm modules
-
-module format for jQuery, Angular, Ember, React
-
-### Principles of build
-
-Keep project build in single file 'gulpfile.js'
-
-
-Improvements:
-
-make a module based on jQuery common compatible
-
-show how to set libs up using `generator-babel-boilerplate`
-
-Change management; Some parts should have little or no dependencies to avoid revolutions. The further down the stack it is the more it must evolve. The apps can experiment but the underlying libraries must be well encapsulated and free to evolve avoiding both stagnation and upheaval.
-
-CSS Next processing as alternative to SASS/Less.
-
-Some tests can be run in node rather than a browser
+   ```
+$ cd odoo-vagrant
+$ vagrant up
+   ```

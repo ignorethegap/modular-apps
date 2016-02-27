@@ -1,0 +1,29 @@
+---
+
+odoo_required_tools:
+    - sudo
+    - git
+    - mercurial
+    - python-pip
+
+odoo_pypi_packages:
+    - psycogreen
+
+odoo_wkhtmltox_depends_common:
+    - fontconfig
+    - libfontconfig1
+    - libfreetype6
+    - libpng12-0
+    - zlib1g
+    - libssl1.0.0
+    - libx11-6
+    - libxext6
+    - libxrender1
+    - libstdc++6
+    - libc6
+
+odoo_wkhtmltox_urls:
+    - http://download.gna.org/wkhtmltopdf/0.12/{{ odoo_wkhtmltox_version }}/wkhtmltox-{{ odoo_wkhtmltox_version }}_linux-{{ ansible_distribution_release }}-{{ odoo_debian_arch }}.deb
+    - http://nightly.odoo.com/extra/wkhtmltox-{{ odoo_wkhtmltox_version }}_linux-{{ ansible_distribution_release }}-{{ odoo_debian_arch }}.deb
+
+odoo_wkhtmltox_dest: "/root/wkhtmltox-{{ odoo_wkhtmltox_version }}_linux-{{ ansible_distribution_release }}-{{ odoo_debian_arch }}.deb"
