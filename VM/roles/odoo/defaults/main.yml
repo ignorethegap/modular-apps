@@ -34,6 +34,7 @@ odoo_postgresql_active_unaccent: True
 
 # Configuration options
 odoo_config_addons_path:
+    - "/home/{{ odoo_user }}/odoo-modules"
     - "/home/{{ odoo_user }}/odoo/server/openerp/addons"
     - "/home/{{ odoo_user }}/odoo/server/addons"
 odoo_config_admin_passwd: admin

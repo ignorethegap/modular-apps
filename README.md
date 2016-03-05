@@ -37,6 +37,8 @@ npm start
 ### Odoo backend
 
 As a sample backend Odoo represents your own Enterprise systems (ERP/CRM/etc)
+Developing you would run a test system locally. The alternative is to run tests
+against a deployed test system at `http://erp.htlm5demoapp.com`.
 
 1. Download and Install Ansible http://docs.ansible.com/intro_installation.html
 
@@ -56,22 +58,14 @@ $ vagrant box add debian7 http://iweb.dl.sourceforge.net/project/vagrantdebianbo
 
    ```
 
-1. Clone this repository
+1. Start the VM
 
    ```
-$ git clone https://github.com/Covetel/odoo-vagrant.git
-
-   ```
-1. Create `addons` directory
-
-   ```
-$ cd odoo-vagrant
-$ mkdir ../addons
-   ```
-1. Edit file `script.sh` and set `$MIRROR_IP` to your IP address mirror.
-1. Vagrant up
-
-   ```
-$ cd odoo-vagrant
 $ vagrant up
    ```
+
+Once started which will take 15 minutes the first time the ERP system can be accessed locally
+at `http://localhost:8069`.   
+The first time you access it you must configure a new database. To be consistent name it `odoo`. The passwords are configured in the playbook.xml, it is configured as `SuPerPassWorD`.
+
+![Create Database](VM/Create Database.png)

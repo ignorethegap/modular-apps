@@ -12,6 +12,7 @@ brew install caskroom/cask/brew-cask
 brew cask install Caskroom/cask/virtualbox
 brew cask install vagrant
 brew case install vagrant-manager
+brew install ansible
 ```
 
 Windows
@@ -41,3 +42,34 @@ Vagrant
 
 * `vagrant destroy` to get rid of the current vagrant guest build
 * `vagrant provision` to re-build VM
+
+Ansible defaults
+----------------
+postgresql_admin_user: "postgres"
+postgresql_default_auth_method: "trust"
+
+Odoo config
+-----------
+
+master pass: SuPerPassWorD
+
+odoo admin: admin/SuPerPassWorD
+
+SSH
+---
+You can access the running VM by the simple command `vagrant ssh`
+
+You can control the VM (and old ones) via the VirtualBox Manager App
+
+
+Running Ansible Tasks
+---------------------
+
+You can run ansible tasks from outside the VM using the `ansible-playbook` command. This is faster than provision and should be mostly equal.
+
+```
+ansible-playbook --private-key=.vagrant/machines/default/virtualbox/private_key -u vagrant -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory VM/playbook.yml
+```
+
+
+

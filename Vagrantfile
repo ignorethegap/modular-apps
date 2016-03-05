@@ -25,25 +25,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Needed to acces openerp on its default port 8069 on the host machine. (localhost:8069)
   config.vm.network :forwarded_port, guest: 8069, host: 8069 # odoo
-  config.vm.network :forwarded_port, guest: 22, host: 3322 # ssh
 
   # Only needed if you want to browse DB from pgadmin or some other pg tool
   config.vm.network :forwarded_port, host: 4321, guest: 5432
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.33.10"
+#  config.vm.network "private_network", ip: "192.168.33.10"
 
-  # Enable provisioning with a shell script. Additional provisioners such as
-  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
-  # documentation for more information about their specific syntax and use.
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   sudo apt-get update
-  #   sudo apt-get install -y apache2
-  # SHELL
   config.vm.provision "ansible" do |ansible|
-    ansible.inventory_path = "inventory"
-    ansible.playbook = "playbook.yml"
+    # https://www.vagrantup.com/docs/provisioning/ansible.html      
+    ansible.playbook = "VM/playbook.yml"
     ansible.verbose = "v"
     ansible.extra_vars = {
       ansible_ssh_user: "vagrant",
@@ -54,6 +46,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # The command is run in local-mode on the guest with inventory "127.0.0.1," - comma important to trick the interpreter.
   # config.vm.provision :shell, inline: "ansible-playbook /vagrant/ansible-odoo/playbook.yml -i '127.0.0.1,' --connection=local"
-
-  # config.vm.synced_folder "../website.com/addons", "/opt/odoo/.local/share/Odoo/addons/9.0"
+  
+#  config.vm.synced_folder "odoo/modules", "/home/odoo/odoo/modules"
 end

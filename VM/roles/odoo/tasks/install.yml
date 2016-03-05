@@ -42,6 +42,9 @@
   tags:
     - odoo_log
 
+- name: Odoo directory
+  file: path=/home/{{ odoo_user }}/odoo state=directory owner={{ odoo_user }} group={{ odoo_user }} mode=0775
+  
 - name: Project repository already cloned?
   stat: path={{ odoo_repo_dest }}
   register: project_path
