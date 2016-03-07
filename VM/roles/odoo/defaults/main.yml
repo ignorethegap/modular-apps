@@ -94,4 +94,4 @@ odoo_config_custom: {}
     #your_option2: value2
 
 # Extra options
-odoo_user_sshkeys: False    # ../../path/to/public_keys/*
+odoo_user_sshkeys: ""    # ../../path/to/public_keys/*
