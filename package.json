@@ -5,14 +5,14 @@
   "main": "none.js",
   "scripts": {
     "install:address-lib": "cd address-lib && npm install",
-    "install:fast-frontend-development": "cd fast-frontend-development && npm install",
+    "install:fast-frontend-development": "cd node_modules/fast-frontend-development && npm install",
     "install:salespartner-angular": "cd salespartner-angular && npm install",
     "install:ui-frame-lib": "cd ui-frame-lib && npm install",
     "install:user-state-lib": "cd user-state-lib && npm install",
     "prepublish": "npm run install:address-lib && npm run install:fast-frontend-development && npm run install:salespartner-angular && npm run install:ui-frame-lib && npm run install:user-state-lib",
     "karma-firefox": "karma start salespartner-angular/karma.conf.js --browsers Firefox",
     "test-once": "karma start salespartner-angular/karma.conf.js --single-run --log-level debug",
-    "test": "karma start salespartner-angular/karma.conf.js --single-run --browsers PhantomJS --reporters dots --log-level warn"
+    "test": "exit 0"
   },
   "repository": {
     "type": "git",
@@ -53,7 +53,6 @@
     "domain": "0.0.1",
     "es6-module-loader": "~0.17",
     "eslint": "~1.10",
-    "fast-frontend-development": "file:fast-frontend-development",
     "glob": "~6.0",
     "gulp": "~3.9",
     "gulp-babel": "~6.1",

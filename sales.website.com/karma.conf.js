@@ -1,4 +1,4 @@
-var karmaConfig = require('../fast-frontend-development').karmaConfig,
+var karmaConfig = require('fast-frontend-development').karmaConfig,
     path = require('path');
 
 module.exports = function(config) {
