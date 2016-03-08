@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+pg_dump {{odoo_config_db_name}} -U {{odoo_config_db_user}} | gzip > /vagrant/odoo/odoo-db-test-data.sql.gz
