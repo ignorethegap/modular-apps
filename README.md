@@ -69,3 +69,18 @@ at `http://localhost:8069`.
 The first time you access it you must configure a new database. To be consistent name it `odoo`. The passwords are configured in the playbook.xml, it is configured as `SuPerPassWorD`.
 
 ![Create Database](VM/Create Database.png)
+
+Database backup and restore
+---------------------------
+
+### Create new backup
+```
+vagrant ssh
+./backupscript.sh 
+```
+
+Backup file was save in odoo/odoo-db-test-data.sql.gz
+
+### Restore from backup
+
+Вackup is automatically restored at vagrant provision

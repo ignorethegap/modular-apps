@@ -1,0 +1,2 @@
+---
+- template: src=backupscript.sh.j2 dest=/home/vagrant/backupscript.sh owner=vagrant group=vagrant mode=0755

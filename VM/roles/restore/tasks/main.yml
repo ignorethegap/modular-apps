@@ -1,0 +1,2 @@
+---
+- shell: gunzip -c /vagrant/odoo/odoo-db-test-data.sql.gz | psql {{odoo_config_db_name}} -U {{odoo_config_db_user}}
