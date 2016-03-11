@@ -1,7 +1,6 @@
 ---
 # tasks file for locales
 - name: install
-  sudo: yes
   apt:
     name: locales
     state: latest
@@ -10,7 +9,6 @@
   tags: [configuration, locales, locales-install]
 
 - name: install (specified) language packs
-  sudo: yes
   apt:
     name: "{{ item }}"
     state: latest
@@ -20,7 +18,6 @@
   tags: [configuration, locales, locales-language-packs-present]
 
 - name: remove (specified) language packs
-  sudo: yes
   apt:
     name: "{{ item }}"
     state: absent
@@ -30,14 +27,12 @@
   tags: [configuration, locales, locales-language-packs-absent]
 
 - name: detect locale gen file
-  sudo: yes
   stat:
     path: "{{ locales_gen_file }}"
   register: locales_gen_file_stats
   tags: [configuration, locales, locales-gen-file]
 
 - name: create locale gen file
-  sudo: yes
   file:
     path: "{{ locales_gen_file }}"
     state: touch
@@ -45,7 +40,6 @@
   tags: [configuration, locales, locales-gen-file]
 
 - name: make sure (specified) locales are present
-  sudo: yes
   locale_gen:
     name: "{{ item }}"
     state: present
@@ -54,7 +48,6 @@
   tags: [configuration, locales, locales-present]
 
 - name: make sure (specified) locales are absent
-  sudo: yes
   locale_gen:
     name: "{{ item }}"
     state: absent
@@ -63,7 +56,6 @@
   tags: [configuration, locales, locales-absent]
 
 - name: set default locale
-  sudo: yes
   template:
     src: etc/default/locale.j2
     dest: /etc/default/locale

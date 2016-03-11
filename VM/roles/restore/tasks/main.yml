@@ -1,2 +1,10 @@
 ---
+- name: Stop Odoo service
+  service: name={{ odoo_service }} state=stopped
+  ignore_errors: yes
+
 - shell: gunzip -c /vagrant/odoo/odoo-db-test-data.sql.gz | psql {{odoo_config_db_name}} -U {{odoo_config_db_user}}
+
+- name: Start Odoo service
+  service: name={{ odoo_service }} state=started
+  ignore_errors: yes

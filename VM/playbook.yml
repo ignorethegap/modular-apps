@@ -8,8 +8,8 @@
     - locales
     - postgresql
     - backup
-    - restore
     - odoo
+    - restore
   vars:
     - odoo_version: 9.0
     - odoo_config_admin_passwd: SuPerPassWorD
