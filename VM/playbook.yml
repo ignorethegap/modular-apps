@@ -3,13 +3,13 @@
 
 - name: Odoo
   hosts: all
-  sudo: yes
+  become: yes
   roles:
     - locales
     - postgresql
-    - odoo
     - backup
     - restore
+    - odoo
   vars:
     - odoo_version: 9.0
     - odoo_config_admin_passwd: SuPerPassWorD
