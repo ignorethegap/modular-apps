@@ -27,7 +27,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 8069, host: 8069 # odoo
 
   # Only needed if you want to browse DB from pgadmin or some other pg tool
-  config.vm.network :forwarded_port, host: 4321, guest: 5432
+  config.vm.network :forwarded_port, guest: 5432, host: 4321
+
+  config.ssh.forward_agent = true
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.

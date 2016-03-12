@@ -3,12 +3,12 @@
 
 - name: Odoo
   hosts: all
-  sudo: yes
+  become: yes
   roles:
     - locales
     - postgresql
-    - odoo
     - backup
+    - odoo
     - restore
   vars:
     - odoo_version: 9.0

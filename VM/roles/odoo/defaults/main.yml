@@ -28,7 +28,7 @@ odoo_wkhtmltox_version: 0.12.1      # Download URLs available in the
 odoo_reportlab_font_url: http://www.reportlab.com/ftp/pfbfer.zip
 
 # Tasks related to PostgreSQL
-odoo_postgresql_set_user: True
+odoo_postgresql_set_user: true
 odoo_postgresql_user_role_attr: CREATEDB,NOSUPERUSER
 odoo_postgresql_active_unaccent: True
 
@@ -95,3 +95,4 @@ odoo_config_custom: {}
 
 # Extra options
 odoo_user_sshkeys: ""    # ../../path/to/public_keys/*
+odoo_create_database: true

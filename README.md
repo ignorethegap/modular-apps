@@ -84,3 +84,15 @@ Backup file was save in odoo/odoo-db-test-data.sql.gz
 ### Restore from backup
 
 Вackup is automatically restored at vagrant provision
+
+Install new theme
+-----------------
+- Download and unzip theme for odoo 9.0 to /odoo/modules
+- Restart vagrant or odoo service
+- Go to "Settings"
+- Click "Browse Apps"
+- Input in search field theme`s name
+- Press <Enter>
+- Click "Install"
+
+![Install new theme](VM/Install new theme.png)

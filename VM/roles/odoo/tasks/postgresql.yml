@@ -28,13 +28,49 @@
         and odoo_postgresql_set_user
 
 - name: Local PostgreSQL - Set the Odoo user password
-  sudo: yes
   sudo_user: postgres
   postgresql_user: name={{ odoo_config_db_user }}
                    password={{ odoo_config_db_passwd }}
   when: odoo_config_db_host in [False, 'localhost', '127.0.0.1']
         and odoo_config_db_passwd is defined and odoo_config_db_passwd
         and odoo_postgresql_set_user
+
+- name: Remote PostgreSQL - GRANT priv
+  delegate_to: "{{ odoo_config_db_host }}"
+  remote_user: "{{ odoo_config_db_host_user }}"
+  sudo: yes
+  sudo_user: postgres
+  shell: psql -U postgres  -c 'GRANT "{{odoo_config_db_user}}" TO "postgres" WITH ADMIN OPTION'
+  when: odoo_config_db_host not in [False, 'localhost', '127.0.0.1']
+          and odoo_create_database
+
+- name: Local PostgreSQL - GRANT priv
+  sudo: yes
+  sudo_user: postgres
+  shell: psql -U postgres  -c 'GRANT "{{odoo_config_db_user}}" TO "postgres" WITH ADMIN OPTION'
+  when: odoo_config_db_host in [False, 'localhost', '127.0.0.1']
+          and odoo_create_database
+
+- name: Remote PostgreSQL - Create Database
+  delegate_to: "{{ odoo_config_db_host }}"
+  remote_user: "{{ odoo_config_db_host_user }}"
+  sudo: yes
+  sudo_user: postgres
+  postgresql_db: name={{odoo_config_db_name}}
+                 encoding='UTF-8'
+                 owner={{odoo_config_db_user}}
+  when: odoo_config_db_host not in [False, 'localhost', '127.0.0.1']
+        and odoo_create_database
+
+- name: Local PostgreSQL - Create Database
+  sudo: yes
+  sudo_user: postgres
+  postgresql_db: name={{odoo_config_db_name}}
+                 encoding='UTF-8'
+                 owner={{odoo_config_db_user}}
+  when: odoo_config_db_host in [False, 'localhost', '127.0.0.1']
+        and odoo_create_database
+
 
 - name: Remote PostgreSQL - Active the 'unaccent' extension on databases
   delegate_to: "{{ odoo_config_db_host }}"
