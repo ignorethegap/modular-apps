@@ -4,11 +4,9 @@
   "description": "Common ground for all modules and apps. In your own company you might break these out as separate repositories",
   "main": "none.js",
   "scripts": {
-    "install:fast-frontend-development": "cd node_modules/fast-frontend-development && npm install",
-    "prepublish": "npm run install:fast-frontend-development",
     "karma-firefox": "karma start salespartner-angular/karma.conf.js --browsers Firefox",
     "test-once": "karma start salespartner-angular/karma.conf.js --single-run --log-level debug",
-    "test": "exit 0"
+    "test": "karma start sales.website.com/karma.conf.js --single-run --browsers PhantomJS --reporters dots --log-level warn"
   },
   "repository": {
     "type": "git",
@@ -41,6 +39,8 @@
     "browserify-ngannotate": "~2.0",
     "browserify-shim": "~3.8",
     "chai": "~3.4",
+    "cssnext": "~1.8",
+    "cssnext-loader": "~1.0",
     "debug": "~2.2",
     "del": "~2.2",
     "docco": "~0.7",
@@ -121,6 +121,8 @@
     "angular": "~1.4",
     "front-matter": "~2.0.5",
     "front-router": "~1.0.0",
+    "gulp-rollup": "^1.8.0",
+    "karma": "^0.13.22",
     "metalsmith": "~2.1.0"
   }
 }

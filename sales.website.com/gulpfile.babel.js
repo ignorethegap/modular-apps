@@ -10,15 +10,19 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     htmlhint = require('gulp-htmlhint'),
     rename = require('gulp-rename'),
+    // filter = require('gulp-filter'),
     uglify = require('gulp-uglify'),
+    // bump = require('gulp-bump'),
+    rollup = require('gulp-rollup'),
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
     tap = require('gulp-tap'),
     plumber = require('gulp-plumber'),
+    karma = require('karma'),
     connect = require('gulp-connect');
 
-var appEntryFile = './app/app.js',
-    appOutputDir = './assets/',
+var appEntryFile = './client/app/app.js',
+    appOutputDir = './client/assets/',
     appOutputFile = 'app.js';
 
 gulp.task('dist', ['html', 'scripts', 'styles']);
@@ -34,7 +38,7 @@ gulp.task('watch', function() {
       gulp.start('scripts-persistent');
   });
 
-  // gulp.watch(['./app/app.js', 'app/**/*.js'], ['scripts']).on('change', connect.reload);
+  // gulp.watch([appEntryFile, 'app/**/*.js'], ['scripts']).on('change', connect.reload);
   gulp.watch(['./styles/**.scss'], ['styles']).on('change', reload);
 });
 
@@ -46,8 +50,16 @@ gulp.task('serve', function() {
   });
 });
 
-gulp.task('test', function() {
+// gulp.task('test', function() {
+//     console.log(__dirname);
+// });
 
+gulp.task('test', ['scripts-persistent'], function (done) {
+    console.log(__dirname + '/karma.conf.js');
+    return karma.server.start({
+        configFile: path.join(__dirname,'karma.conf.js'),
+        singleRun: true
+    }, done);
 });
 
 gulp.task('html', function() {
@@ -55,6 +67,15 @@ gulp.task('html', function() {
     .pipe(plumber())
     .pipe(htmlhint())
     .pipe(htmlhint.failReporter());
+});
+
+gulp.task('bundle', function() {
+    gulp.src(appEntryFile, { read:false })
+      .pipe(rollup({
+          sourceMap: true
+      }))
+      .pipe(sourcemaps.write("."))
+      .pipe(gulp.dest("dist"));
 });
 
 var ngHtml2Js = require('browserify-ng-html2js')({
@@ -67,9 +88,12 @@ function getBundler() {
   if (!bundler) {
     var conf = Object.create(watchify.args);
     conf.entries = appEntryFile;
+    conf.cache = {};
     conf.debug = true;
     conf.fullPaths = false;
-    bundler = watchify(browserify(conf));
+    conf.paths = ['../node_modules','./client/modules'];
+    conf.plugin = [watchify];
+    bundler = browserify(conf);
   }
   return bundler;
 };
@@ -99,7 +123,7 @@ gulp.task('scripts', ['scripts-persistent'], function() {
 
 
 gulp.task('multiple-scripts', function() {
-  gulp.src('./app/app.js')
+  gulp.src(appEntryFile)
     .pipe(plumber())
     .pipe(tap(
         function(file) {
@@ -120,16 +144,16 @@ gulp.task('multiple-scripts', function() {
         }
         ))
     .pipe(buffer())
-    .pipe(gulp.dest('./assets'))
+    .pipe(gulp.dest(appOutputDir))
     .pipe(rename({suffix: '.min'}))
     .pipe(sourcemaps.init())
     .pipe(uglify())
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./assets'));
+    .pipe(gulp.dest(appOutputDir));
 });
 
 gulp.task('styles', function() {
-    gulp.src('./assets/all.scss')
+    gulp.src(path.join(appOutputDir,'all.scss'))
         .pipe(plumber())
         .pipe(sass({
             sourcemap: true,
@@ -138,7 +162,7 @@ gulp.task('styles', function() {
         .pipe(sourcemaps.init({loadMaps: true}))
         // .pipe(minifycss())
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./assets'));
+        .pipe(gulp.dest(appOutputDir));
 });
 
 /*
