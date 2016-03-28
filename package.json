@@ -121,6 +121,7 @@
     "angular": "~1.4",
     "front-matter": "~2.0.5",
     "front-router": "~1.0.0",
+    "gulp-header": "^1.7.1",
     "gulp-rollup": "^1.8.0",
     "karma": "^0.13.22",
     "metalsmith": "~2.1.0"

@@ -7,9 +7,10 @@ var gulp = require('gulp'),
     reload = browserSync.reload,
     browserify = require('browserify'),
     watchify = require('watchify'),
-    jshint = require('gulp-jshint'),
+//    jshint = require('gulp-jshint'),
     htmlhint = require('gulp-htmlhint'),
     rename = require('gulp-rename'),
+    header = require('gulp-header'),
     // filter = require('gulp-filter'),
     uglify = require('gulp-uglify'),
     // bump = require('gulp-bump'),
@@ -23,7 +24,10 @@ var gulp = require('gulp'),
 
 var appEntryFile = './client/app/app.js',
     appOutputDir = './client/assets/',
-    appOutputFile = 'app.js';
+    appOutputFile = 'app.js',
+    pkg = require('./package.json');
+
+var extensions = ['.js'];
 
 gulp.task('dist', ['html', 'scripts', 'styles']);
 
