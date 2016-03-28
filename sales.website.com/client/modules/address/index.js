@@ -1,5 +1,7 @@
-exports.Address = function() {
+export class Address {
+    constructor() {
 
-};
+    }
+}
 
-exports.isAddressLike = require('./isAddressLike.fn')
+export {default as isAddressLike} from './isAddressLike.fn';
