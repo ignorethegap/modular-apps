@@ -1,4 +1,4 @@
-var gulp = require('gulp'),
+let gulp = require('gulp'),
     gutil = require('gulp-util'),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),
@@ -22,12 +22,12 @@ var gulp = require('gulp'),
     karma = require('karma'),
     connect = require('gulp-connect');
 
-var appEntryFile = './client/app/app.js',
+let appEntryFile = './client/app/app.js',
     appOutputDir = './client/assets/',
     appOutputFile = 'app.js',
     pkg = require('./package.json');
 
-var extensions = ['.js'];
+let extensions = ['.js'];
 
 gulp.task('dist', ['html', 'scripts', 'styles']);
 
@@ -87,6 +87,14 @@ var ngHtml2Js = require('browserify-ng-html2js')({
     extension: 'tpl.html'
 });
 
+var banner = [
+    "/**",
+    " * <%= pkg.name %> v.<%= pkg.version %> - <%= pkg.description %>",
+    " * Copyright (c) 2016 <%= pkg.author %>",
+    " * <%= pkg.license %>",
+    " */", ""
+].join("\n");
+
 var bundler;
 function getBundler() {
   if (!bundler) {
@@ -97,24 +105,26 @@ function getBundler() {
     conf.fullPaths = false;
     conf.paths = ['../node_modules','./client/modules'];
     conf.plugin = [watchify];
+    conf.extensions = extensions;  
     bundler = browserify(conf);
   }
   return bundler;
 };
 
 function bundle() {
-  return getBundler()
-    .transform('babelify', {
-      presets: ['es2015'],
-      sourceMapRelative: __dirname
-    })
-    .transform(ngHtml2Js)
-    .transform('browserify-ngannotate')
-    .bundle()
-    .on('error', function(err) { console.log('Error: ' + err.message); })
-    .pipe(source(appOutputFile))
-    .pipe(gulp.dest(appOutputDir))
-    .pipe(reload({ stream: true }));
+    return getBundler()
+        .transform('babelify', {
+          presets: ['es2015'],
+          extensions: extensions,
+          sourceMapRelative: __dirname
+        })
+        .transform(ngHtml2Js)
+        .transform('browserify-ngannotate')
+        .bundle()
+        .on('error', gutil.log)
+        .pipe(source(appOutputFile))
+        .pipe(gulp.dest(appOutputDir))
+        .pipe(reload({ stream: true }));
 }
 
 gulp.task('scripts-persistent', function() {
@@ -150,8 +160,9 @@ gulp.task('multiple-scripts', function() {
     .pipe(buffer())
     .pipe(gulp.dest(appOutputDir))
     .pipe(rename({suffix: '.min'}))
-    .pipe(sourcemaps.init())
+    .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(uglify())
+    .pipe(header(banner, {pkg:pkg}))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(appOutputDir));
 });
