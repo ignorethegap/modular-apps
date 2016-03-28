@@ -105,7 +105,7 @@ function getBundler() {
     conf.fullPaths = false;
     conf.paths = ['../node_modules','./client/modules'];
     conf.plugin = [watchify];
-    conf.extensions = extensions;  
+    conf.extensions = extensions;
     bundler = browserify(conf);
   }
   return bundler;
