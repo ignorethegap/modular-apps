@@ -2,7 +2,7 @@
 // import * from "user-state";
 import Address from "address";
 
-export function test() {
+function test() {
   var person = new Address({
     firstName: "Christoph",
     lastName: "Burgdorf",
@@ -14,3 +14,5 @@ export function test() {
 }
 
 // new Promise
+
+test();

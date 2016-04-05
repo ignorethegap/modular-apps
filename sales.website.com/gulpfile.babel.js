@@ -35,7 +35,7 @@ gulp.task('watch', function() {
 
   browserSync({
     server: {
-      baseDir: './'
+      baseDir: './client/'
     }
   });
   getBundler().on('update', function() {
